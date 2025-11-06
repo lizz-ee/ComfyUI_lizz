@@ -1,0 +1,111 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "sd-v1-5-inpainting.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load SD 1.5 Inpainting Model"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text": "photorealistic, high quality, detailed",
+      "clip": ["1", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": "blurry, low quality, watermark, text, deformed",
+      "clip": ["1", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "6": {
+    "inputs": {
+      "image": "input.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Input Image"
+    }
+  },
+  "7": {
+    "inputs": {
+      "image": "mask.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Mask"
+    }
+  },
+  "8": {
+    "inputs": {
+      "channel": "red",
+      "image": ["7", 0]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "Convert Mask Image to Mask"
+    }
+  },
+  "9": {
+    "inputs": {
+      "grow_mask_by": 6,
+      "pixels": ["6", 0],
+      "vae": ["1", 2],
+      "mask": ["8", 0]
+    },
+    "class_type": "VAEEncodeForInpaint",
+    "_meta": {
+      "title": "VAE Encode for Inpainting"
+    }
+  },
+  "10": {
+    "inputs": {
+      "seed": 42,
+      "steps": 30,
+      "cfg": 7.5,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1.0,
+      "model": ["1", 0],
+      "positive": ["4", 0],
+      "negative": ["5", 0],
+      "latent_image": ["9", 0]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler (Inpaint)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "samples": ["10", 0],
+      "vae": ["1", 2]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "12": {
+    "inputs": {
+      "filename_prefix": "inpaint",
+      "images": ["11", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Inpainted Image"
+    }
+  }
+}
