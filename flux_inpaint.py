@@ -265,6 +265,7 @@ class InpaintingHelper:
                                   input_image_name: str,
                                   mask_image_name: str,
                                   filename_prefix: str = "inpaint",
+                                  negative_prompt: str = "",
                                   seed: Optional[int] = None,
                                   steps: int = 30,
                                   denoise: float = 1.0,
@@ -276,7 +277,12 @@ class InpaintingHelper:
             workflow["4"]["inputs"]["text"] = prompt
 
         if "5" in workflow:
-            workflow["5"]["inputs"]["text"] = "blurry, low quality, watermark, text"
+            # Combine default negative with custom negative
+            default_negative = "blurry, low quality, watermark, text, deformed"
+            if negative_prompt:
+                workflow["5"]["inputs"]["text"] = f"{negative_prompt}, {default_negative}"
+            else:
+                workflow["5"]["inputs"]["text"] = default_negative
 
         # Update input image (node 6)
         if "6" in workflow:
@@ -305,6 +311,7 @@ class InpaintingHelper:
     def inpaint(self, original_image_path: str,
                annotated_image_path: str,
                prompt: str = "photorealistic, high quality, detailed",
+               negative_prompt: str = "",
                workflow_path: str = "sd_inpaint_workflow.json",
                seed: Optional[int] = None,
                steps: int = 30,
@@ -317,6 +324,7 @@ class InpaintingHelper:
             original_image_path: Path to clean original image (no annotation)
             annotated_image_path: Path to image with colored annotation (for mask detection)
             prompt: What the inpainted area should contain
+            negative_prompt: What should NOT be in the inpainted area (e.g., "car, vehicle, automobile")
             workflow_path: Path to inpainting workflow JSON
             seed: Random seed
             steps: Sampling steps
@@ -364,12 +372,14 @@ class InpaintingHelper:
         workflow = self.load_workflow(workflow_path)
 
         print(f"Inpaint prompt: {prompt}")
+        if negative_prompt:
+            print(f"Negative prompt: {negative_prompt}")
         print(f"Steps: {steps}, Denoise: {denoise}, CFG: {cfg}")
         print(f"Output prefix: {filename_prefix}")
 
         workflow = self.update_sd_inpaint_workflow(
             workflow, prompt, input_filename, mask_filename,
-            filename_prefix, seed, steps, denoise, cfg
+            filename_prefix, negative_prompt, seed, steps, denoise, cfg
         )
 
         print("\nQueueing inpainting task...")
@@ -407,6 +417,10 @@ Examples:
     parser.add_argument('-p', '--prompt',
                        default='photorealistic, high quality, detailed',
                        help='Description of inpainted area')
+    parser.add_argument('-n', '--negative-prompt',
+                       default='',
+                       dest='negative_prompt',
+                       help='What to avoid (e.g., "car, vehicle, automobile" for object removal)')
     parser.add_argument('--steps', type=int, default=30,
                        help='Sampling steps (default: 30)')
     parser.add_argument('--denoise', type=float, default=1.0,
@@ -437,6 +451,7 @@ Examples:
             original_image_path=args.original,
             annotated_image_path=args.annotated,
             prompt=args.prompt,
+            negative_prompt=args.negative_prompt,
             workflow_path=args.workflow,
             seed=args.seed,
             steps=args.steps,
