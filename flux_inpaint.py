@@ -36,6 +36,68 @@ class InpaintingHelper:
             print(f"Make sure ComfyUI is running. Error: {e}")
             sys.exit(1)
 
+    def get_history(self, prompt_id: str) -> dict:
+        """Get the history/status of a prompt"""
+        try:
+            req = urllib.request.Request(f"{self.base_url}/history/{prompt_id}")
+            response = urllib.request.urlopen(req)
+            return json.loads(response.read())
+        except urllib.error.URLError as e:
+            return {}
+
+    def wait_for_completion(self, prompt_id: str, timeout: int = 300) -> bool:
+        """Wait for a prompt to complete, with status updates"""
+        import time
+
+        print(f"\nWaiting for inpainting to complete...")
+        print("(This may take 30-60 seconds depending on your GPU)")
+
+        start_time = time.time()
+        last_status = ""
+
+        while time.time() - start_time < timeout:
+            history = self.get_history(prompt_id)
+
+            if prompt_id in history:
+                prompt_info = history[prompt_id]
+
+                # Check for completion
+                if 'outputs' in prompt_info:
+                    print(f"\n✓ Inpainting completed successfully!")
+
+                    # Show output files
+                    for node_id, output in prompt_info['outputs'].items():
+                        if 'images' in output:
+                            for img in output['images']:
+                                filename = img.get('filename', 'unknown')
+                                subfolder = img.get('subfolder', '')
+                                full_path = os.path.join('output', subfolder, filename) if subfolder else os.path.join('output', filename)
+                                print(f"  Output: {full_path}")
+
+                    return True
+
+                # Check for errors
+                if 'status' in prompt_info:
+                    status = prompt_info['status']
+                    if 'status_str' in status and status['status_str'] != last_status:
+                        last_status = status['status_str']
+                        print(f"  Status: {last_status}")
+
+                    if status.get('completed', False):
+                        print(f"\n✓ Task completed!")
+                        return True
+
+                    if 'exception_message' in status:
+                        print(f"\n✗ Error: {status['exception_message']}")
+                        return False
+
+            # Show progress dots
+            print(".", end="", flush=True)
+            time.sleep(2)
+
+        print(f"\n✗ Timeout after {timeout}s")
+        return False
+
     def upload_image(self, image_path: str, subfolder: str = "") -> dict:
         """Upload an image to ComfyUI"""
         with open(image_path, 'rb') as f:
@@ -202,6 +264,7 @@ class InpaintingHelper:
     def update_sd_inpaint_workflow(self, workflow: dict, prompt: str,
                                   input_image_name: str,
                                   mask_image_name: str,
+                                  filename_prefix: str = "inpaint",
                                   seed: Optional[int] = None,
                                   steps: int = 30,
                                   denoise: float = 1.0,
@@ -232,6 +295,10 @@ class InpaintingHelper:
             workflow["10"]["inputs"]["steps"] = steps
             workflow["10"]["inputs"]["cfg"] = cfg
             workflow["10"]["inputs"]["denoise"] = denoise
+
+        # Update output filename prefix (node 12)
+        if "12" in workflow:
+            workflow["12"]["inputs"]["filename_prefix"] = filename_prefix
 
         return workflow
 
@@ -287,27 +354,38 @@ class InpaintingHelper:
         mask_filename = mask_result['name']
         print(f"Uploaded mask: {mask_filename}")
 
+        # Create output filename prefix from input filename
+        # e.g., "flux_cinematic_00003.png" -> "flux_cinematic_00003_inpaint"
+        input_basename = os.path.splitext(os.path.basename(original_image_path))[0]
+        filename_prefix = f"{input_basename}_inpaint"
+
         # Load and update workflow
         print(f"\nLoading workflow: {workflow_path}")
         workflow = self.load_workflow(workflow_path)
 
         print(f"Inpaint prompt: {prompt}")
         print(f"Steps: {steps}, Denoise: {denoise}, CFG: {cfg}")
+        print(f"Output prefix: {filename_prefix}")
 
         workflow = self.update_sd_inpaint_workflow(
             workflow, prompt, input_filename, mask_filename,
-            seed, steps, denoise, cfg
+            filename_prefix, seed, steps, denoise, cfg
         )
 
         print("\nQueueing inpainting task...")
         result = self.queue_prompt(workflow)
         prompt_id = result['prompt_id']
 
-        print(f"\n✓ Inpainting started!")
+        print(f"\n✓ Inpainting queued!")
         print(f"Prompt ID: {prompt_id}")
         print(f"Seed: {workflow['10']['inputs']['seed']}")
-        print(f"\nMonitor progress at: http://{self.server_address}")
-        print("Check output folder for result when complete!")
+
+        # Wait for completion and show status
+        success = self.wait_for_completion(prompt_id)
+
+        if not success:
+            print(f"\n✗ Inpainting failed or timed out")
+            print(f"Check ComfyUI console for errors: http://{self.server_address}")
 
         return prompt_id
 
