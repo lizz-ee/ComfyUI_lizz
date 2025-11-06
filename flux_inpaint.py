@@ -235,7 +235,8 @@ class InpaintingHelper:
 
         return workflow
 
-    def inpaint(self, annotated_image_path: str,
+    def inpaint(self, original_image_path: str,
+               annotated_image_path: str,
                prompt: str = "photorealistic, high quality, detailed",
                workflow_path: str = "sd_inpaint_workflow.json",
                seed: Optional[int] = None,
@@ -246,7 +247,8 @@ class InpaintingHelper:
         Perform inpainting on an annotated image
 
         Args:
-            annotated_image_path: Path to image with colored annotation
+            original_image_path: Path to clean original image (no annotation)
+            annotated_image_path: Path to image with colored annotation (for mask detection)
             prompt: What the inpainted area should contain
             workflow_path: Path to inpainting workflow JSON
             seed: Random seed
@@ -264,7 +266,7 @@ class InpaintingHelper:
 
         # Create mask from annotation
         mask_path = annotated_image_path.replace('.png', '_mask.png')
-        success, clean_image_path = self.create_mask_from_annotation(
+        success, _ = self.create_mask_from_annotation(
             annotated_image_path, mask_path
         )
 
@@ -275,8 +277,8 @@ class InpaintingHelper:
         # Upload images
         print(f"\nUploading images to ComfyUI...")
 
-        # Upload original image (we'll use the annotated one, mask will hide annotation)
-        input_result = self.upload_image(annotated_image_path)
+        # Upload ORIGINAL clean image (no annotation)
+        input_result = self.upload_image(original_image_path)
         input_filename = input_result['name']
         print(f"Uploaded input: {input_filename}")
 
@@ -316,13 +318,14 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s annotated.png
-  %(prog)s car_circled.png --prompt "empty street"
-  %(prog)s object_marked.png --steps 40 --denoise 1.0
+  %(prog)s original.png annotated.png
+  %(prog)s car.png car_circled.png --prompt "empty street"
+  %(prog)s image.png image_marked.png --steps 40 --denoise 1.0
         """
     )
 
-    parser.add_argument('image', help='Annotated image (with bright colored circle/marking)')
+    parser.add_argument('original', help='Original clean image (no annotation)')
+    parser.add_argument('annotated', help='Annotated image (with bright colored circle/marking)')
     parser.add_argument('-p', '--prompt',
                        default='photorealistic, high quality, detailed',
                        help='Description of inpainted area')
@@ -341,15 +344,20 @@ Examples:
 
     args = parser.parse_args()
 
-    if not os.path.exists(args.image):
-        print(f"Error: Image not found: {args.image}")
+    if not os.path.exists(args.original):
+        print(f"Error: Original image not found: {args.original}")
+        sys.exit(1)
+
+    if not os.path.exists(args.annotated):
+        print(f"Error: Annotated image not found: {args.annotated}")
         sys.exit(1)
 
     helper = InpaintingHelper(args.server)
 
     try:
         helper.inpaint(
-            annotated_image_path=args.image,
+            original_image_path=args.original,
+            annotated_image_path=args.annotated,
             prompt=args.prompt,
             workflow_path=args.workflow,
             seed=args.seed,
