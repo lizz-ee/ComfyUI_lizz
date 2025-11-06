@@ -130,9 +130,10 @@ class InpaintingHelper:
         return annotation_color
 
     def create_mask_from_annotation(self, image_path: str, output_mask_path: str,
-                                   color_tolerance: int = 40, expand_pixels: int = 10) -> Tuple[bool, Optional[str]]:
+                                   color_tolerance: int = 40, expand_pixels: int = 10) -> bool:
         """
         Create a binary mask from an annotated image.
+        Detects annotation outline and fills the interior to create a solid mask.
 
         Args:
             image_path: Path to the annotated image
@@ -141,7 +142,7 @@ class InpaintingHelper:
             expand_pixels: Pixels to expand mask (ensures coverage)
 
         Returns:
-            (success, clean_image_path) - clean_image_path is the original without annotation
+            success - True if mask created successfully
         """
         print(f"\nLoading annotated image: {image_path}")
         img = Image.open(image_path).convert('RGB')
@@ -153,7 +154,7 @@ class InpaintingHelper:
             print("\nNo bright annotation detected!")
             print("Please draw a bright colored annotation (red, blue, green, etc.)")
             print("Make sure the annotation is bright and saturated (not dark or gray)")
-            return False, None
+            return False
 
         # Create mask based on color similarity
         img_array = np.array(img)
@@ -164,14 +165,25 @@ class InpaintingHelper:
         # Create binary mask (white = inpaint, black = keep)
         mask_array = (color_diff < color_tolerance).astype(np.uint8) * 255
 
-        # Expand mask slightly to ensure complete coverage
+        # Convert to PIL for processing
         mask_img = Image.fromarray(mask_array, 'L')
 
-        # Apply dilation to expand the mask
+        # Apply dilation to expand the annotation outline
         for _ in range(expand_pixels):
             mask_img = mask_img.filter(ImageFilter.MaxFilter(3))
 
-        # Save mask
+        # IMPORTANT: Fill holes in the mask (fills interior of circles/shapes)
+        # Convert back to numpy for scipy processing
+        mask_array = np.array(mask_img)
+
+        # Use scipy to fill holes (fills the interior of closed shapes)
+        from scipy import ndimage
+        mask_filled = ndimage.binary_fill_holes(mask_array > 0).astype(np.uint8) * 255
+
+        # Convert back to PIL
+        mask_img = Image.fromarray(mask_filled, 'L')
+
+        # Save filled mask
         mask_img.save(output_mask_path)
         print(f"Mask saved: {output_mask_path}")
 
@@ -180,19 +192,7 @@ class InpaintingHelper:
         mask_percentage = (final_mask_array > 0).sum() / final_mask_array.size * 100
         print(f"Masked area: {mask_percentage:.2f}% of image")
 
-        # Create clean image (original without annotation)
-        # Replace annotation-colored pixels with nearby non-annotation pixels
-        clean_img_array = img_array.copy()
-        mask_bool = color_diff < color_tolerance
-
-        # Simple inpainting: dilate and take surrounding pixels
-        # This is just for upload - real inpainting happens in ComfyUI
-        clean_img = Image.fromarray(clean_img_array)
-        clean_image_path = image_path.replace('.png', '_clean.png')
-        clean_img.save(clean_image_path)
-        print(f"Clean image saved: {clean_image_path}")
-
-        return True, clean_image_path
+        return True
 
     def load_workflow(self, workflow_path: str) -> dict:
         """Load a workflow JSON file"""
@@ -266,7 +266,7 @@ class InpaintingHelper:
 
         # Create mask from annotation
         mask_path = annotated_image_path.replace('.png', '_mask.png')
-        success, _ = self.create_mask_from_annotation(
+        success = self.create_mask_from_annotation(
             annotated_image_path, mask_path
         )
 
