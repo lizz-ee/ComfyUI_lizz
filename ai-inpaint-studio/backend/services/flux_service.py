@@ -5,16 +5,21 @@ Wraps the flux_generate.py script
 
 import sys
 import os
+import importlib.util
 from pathlib import Path
 from typing import Optional
 
-# Add parent directory to path to import flux_generate
 # Path structure: ComfyUI_lizz/ai-inpaint-studio/backend/services/flux_service.py
 # We need to go up to ComfyUI_lizz/ where flux_generate.py is located
 root_dir = Path(__file__).parent.parent.parent.parent
-sys.path.insert(0, str(root_dir))
 
-from flux_generate import FluxGenerator
+# Import flux_generate without polluting sys.path
+flux_generate_path = root_dir / "flux_generate.py"
+spec = importlib.util.spec_from_file_location("flux_generate", flux_generate_path)
+flux_generate = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(flux_generate)
+
+FluxGenerator = flux_generate.FluxGenerator
 
 
 class FluxService:
