@@ -3,16 +3,22 @@ Health check endpoints
 """
 
 from fastapi import APIRouter
-import psutil
 import urllib.request
 import json
 
-# Make torch optional (it's only used for GPU monitoring)
+# Make torch and psutil optional
 try:
     import torch
     TORCH_AVAILABLE = True
-except ImportError:
+except Exception:
+    # Catch ImportError, OSError (DLL issues), and any other import problems
     TORCH_AVAILABLE = False
+
+try:
+    import psutil
+    PSUTIL_AVAILABLE = True
+except ImportError:
+    PSUTIL_AVAILABLE = False
 
 router = APIRouter()
 
@@ -49,9 +55,12 @@ async def health_check():
         pass
 
     # Get system RAM
-    ram = psutil.virtual_memory()
-    ram_used = f"{ram.used / 1024**3:.2f} GB"
-    ram_total = f"{ram.total / 1024**3:.2f} GB"
+    ram_used = "N/A"
+    ram_total = "N/A"
+    if PSUTIL_AVAILABLE:
+        ram = psutil.virtual_memory()
+        ram_used = f"{ram.used / 1024**3:.2f} GB"
+        ram_total = f"{ram.total / 1024**3:.2f} GB"
 
     return {
         "status": "ok",
