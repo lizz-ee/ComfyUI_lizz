@@ -1,0 +1,129 @@
+{
+  "1": {
+    "inputs": {
+      "image": "input_image.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Input Image"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model_name": "depth_anything_v2_vitl.pth"
+    },
+    "class_type": "DepthAnythingV2",
+    "_meta": {
+      "title": "Depth Map Generator"
+    }
+  },
+  "3": {
+    "inputs": {
+      "image": ["1", 0],
+      "model": ["2", 0]
+    },
+    "class_type": "ApplyDepthMap",
+    "_meta": {
+      "title": "Generate Depth Map"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": "high quality, detailed, photorealistic",
+      "clip": ["4", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "low quality, blurry, distorted",
+      "clip": ["4", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "7": {
+    "inputs": {
+      "strength": 0.5,
+      "conditioning": ["5", 0],
+      "control_net": ["3", 0]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet with Depth"
+    }
+  },
+  "8": {
+    "inputs": {
+      "seed": 42,
+      "steps": 20,
+      "cfg": 7.0,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 0.75,
+      "model": ["4", 0],
+      "positive": ["7", 0],
+      "negative": ["6", 0],
+      "latent_image": ["9", 0]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "9": {
+    "inputs": {
+      "pixels": ["1", 0],
+      "vae": ["4", 2]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode Input"
+    }
+  },
+  "10": {
+    "inputs": {
+      "samples": ["8", 0],
+      "vae": ["4", 2]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "11": {
+    "inputs": {
+      "filename_prefix": "ComfyUI_depth_img2img",
+      "images": ["10", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Output Image"
+    }
+  },
+  "12": {
+    "inputs": {
+      "filename_prefix": "ComfyUI_depth_map",
+      "images": ["3", 1]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Depth Map"
+    }
+  }
+}
