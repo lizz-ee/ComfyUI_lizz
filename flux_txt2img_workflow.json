@@ -1,0 +1,85 @@
+{
+  "4": {
+    "inputs": {
+      "ckpt_name": "flux1-dev-fp8_scaled.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "6": {
+    "inputs": {
+      "text": "a beautiful landscape",
+      "clip": ["4", 1]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "8": {
+    "inputs": {
+      "samples": ["13", 0],
+      "vae": ["4", 2]
+    },
+    "class_type": "VAEDecode"
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "flux",
+      "images": ["8", 0]
+    },
+    "class_type": "SaveImage"
+  },
+  "13": {
+    "inputs": {
+      "noise": ["25", 0],
+      "guider": ["22", 0],
+      "sampler": ["16", 0],
+      "sigmas": ["17", 0],
+      "latent_image": ["27", 0]
+    },
+    "class_type": "SamplerCustomAdvanced"
+  },
+  "16": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect"
+  },
+  "17": {
+    "inputs": {
+      "scheduler": "simple",
+      "steps": 20,
+      "denoise": 1.0,
+      "model": ["30", 0]
+    },
+    "class_type": "BasicScheduler"
+  },
+  "22": {
+    "inputs": {
+      "model": ["30", 0],
+      "conditioning": ["6", 0]
+    },
+    "class_type": "BasicGuider"
+  },
+  "25": {
+    "inputs": {
+      "noise_seed": 12345
+    },
+    "class_type": "RandomNoise"
+  },
+  "27": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "30": {
+    "inputs": {
+      "max_shift": 1.15,
+      "base_shift": 0.5,
+      "width": 1024,
+      "height": 1024,
+      "model": ["4", 0]
+    },
+    "class_type": "ModelSamplingFlux"
+  }
+}

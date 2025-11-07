@@ -8,8 +8,14 @@ from typing import Optional
 import asyncio
 import json
 import os
+import time
+
+from services.flux_service import FluxService
 
 router = APIRouter()
+
+# Initialize FLUX service
+flux_service = FluxService()
 
 
 class GenerateRequest(BaseModel):
@@ -36,15 +42,50 @@ async def generate_image(request: GenerateRequest):
     This will call the flux_generate.py script
     """
 
-    # TODO: Import and call flux_generate service
-    # For now, return mock response
+    try:
+        start_time = time.time()
 
-    return {
-        "image_path": "output/mock_image.png",
-        "prompt_id": "mock_123",
-        "seed": request.seed or 12345,
-        "generation_time": 2.5
-    }
+        # Call FLUX generation service
+        result = await flux_service.generate_image(
+            prompt=request.prompt,
+            width=request.width,
+            height=request.height,
+            steps=request.steps,
+            seed=request.seed,
+            style=request.style
+        )
+
+        generation_time = time.time() - start_time
+
+        # Wait for generation to complete (with timeout)
+        max_wait = 120  # 2 minutes
+        elapsed = 0
+        while elapsed < max_wait:
+            status = await flux_service.get_generation_status(result['prompt_id'])
+
+            if status['status'] == 'completed':
+                # Get the first image path
+                image_path = status['images'][0]['path'] if status.get('images') else "output/unknown.png"
+
+                return {
+                    "image_path": image_path,
+                    "prompt_id": result['prompt_id'],
+                    "seed": result['seed'],
+                    "generation_time": time.time() - start_time
+                }
+
+            elif status['status'] == 'error':
+                raise HTTPException(status_code=500, detail=f"Generation failed: {status.get('error', 'Unknown error')}")
+
+            # Still processing, wait a bit
+            await asyncio.sleep(2)
+            elapsed += 2
+
+        # Timeout
+        raise HTTPException(status_code=504, detail="Generation timeout")
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # WebSocket for real-time progress updates
