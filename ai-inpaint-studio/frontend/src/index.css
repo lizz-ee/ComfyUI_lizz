@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply bg-bg-primary text-text-primary;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Custom scrollbar (VSCode style) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-text-secondary;
+}
+
+/* Custom components */
+.btn-primary {
+  @apply px-4 py-2 bg-accent text-white rounded hover:bg-accent-hover transition-colors;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-bg-tertiary text-text-primary border border-border rounded hover:bg-border transition-colors;
+}
+
+.input-field {
+  @apply w-full px-3 py-2 bg-bg-tertiary border border-border rounded text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent;
+}
+
+.card {
+  @apply bg-bg-secondary border border-border rounded-lg p-4;
+}
+
+/* Tabs */
+.tab {
+  @apply px-4 py-2 text-text-secondary hover:text-text-primary cursor-pointer transition-colors border-b-2 border-transparent;
+}
+
+.tab-active {
+  @apply text-text-primary border-accent;
+}
