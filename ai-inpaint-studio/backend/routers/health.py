@@ -3,10 +3,16 @@ Health check endpoints
 """
 
 from fastapi import APIRouter
-import torch
 import psutil
 import urllib.request
 import json
+
+# Make torch optional (it's only used for GPU monitoring)
+try:
+    import torch
+    TORCH_AVAILABLE = True
+except ImportError:
+    TORCH_AVAILABLE = False
 
 router = APIRouter()
 
@@ -18,17 +24,21 @@ async def health_check():
     """
 
     # Check if CUDA/GPU is available
-    gpu_available = torch.cuda.is_available()
-    gpu_name = torch.cuda.get_device_name(0) if gpu_available else "N/A"
-
-    # Get VRAM usage
+    gpu_available = False
+    gpu_name = "N/A"
     vram_used = "N/A"
     vram_total = "N/A"
-    if gpu_available:
-        vram_used_bytes = torch.cuda.memory_allocated(0)
-        vram_total_bytes = torch.cuda.get_device_properties(0).total_memory
-        vram_used = f"{vram_used_bytes / 1024**3:.2f} GB"
-        vram_total = f"{vram_total_bytes / 1024**3:.2f} GB"
+
+    if TORCH_AVAILABLE:
+        gpu_available = torch.cuda.is_available()
+        gpu_name = torch.cuda.get_device_name(0) if gpu_available else "N/A"
+
+        # Get VRAM usage
+        if gpu_available:
+            vram_used_bytes = torch.cuda.memory_allocated(0)
+            vram_total_bytes = torch.cuda.get_device_properties(0).total_memory
+            vram_used = f"{vram_used_bytes / 1024**3:.2f} GB"
+            vram_total = f"{vram_total_bytes / 1024**3:.2f} GB"
 
     # Check if ComfyUI is running
     comfyui_running = False
