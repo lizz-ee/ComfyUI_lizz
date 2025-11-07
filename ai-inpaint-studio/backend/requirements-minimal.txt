@@ -1,0 +1,6 @@
+# Just the web server packages (you already have torch, numpy, etc. from ComfyUI)
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+websockets>=12.0
+python-dotenv>=1.0.0
