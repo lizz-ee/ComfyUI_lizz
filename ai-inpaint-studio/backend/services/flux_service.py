@@ -9,8 +9,10 @@ from pathlib import Path
 from typing import Optional
 
 # Add parent directory to path to import flux_generate
-parent_dir = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(parent_dir))
+# Path structure: ComfyUI_lizz/ai-inpaint-studio/backend/services/flux_service.py
+# We need to go up to ComfyUI_lizz/ where flux_generate.py is located
+root_dir = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(root_dir))
 
 from flux_generate import FluxGenerator
 
@@ -18,7 +20,7 @@ from flux_generate import FluxGenerator
 class FluxService:
     def __init__(self, comfyui_address: str = "127.0.0.1:8190"):
         self.generator = FluxGenerator(comfyui_address)
-        self.workflow_path = str(parent_dir / "flux_txt2img_workflow.json")
+        self.workflow_path = str(root_dir / "flux_txt2img_workflow.json")
 
     async def generate_image(
         self,
@@ -78,7 +80,7 @@ class FluxService:
         actual_seed = workflow.get("25", {}).get("inputs", {}).get("noise_seed", seed or 0)
 
         # Get output path (ComfyUI saves to output directory)
-        output_dir = parent_dir / "output"
+        output_dir = root_dir / "output"
 
         return {
             "prompt_id": prompt_id,
