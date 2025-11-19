@@ -1,0 +1,78 @@
+# CHARACTER DESIGN SHEET PROMPTS FOR LORA TRAINING
+# Nano Banana Character - Multiple Views, Emotions, Poses & Lighting
+
+## TURNAROUND VIEWS (Character Sheet Style)
+1. nano banana character, front view, standing straight, T-pose, neutral expression, character design sheet, white background, even lighting, full body
+2. nano banana character, left side view, standing straight, profile view, character design sheet, white background, even lighting, full body
+3. nano banana character, right side view, standing straight, profile view, character design sheet, white background, even lighting, full body
+4. nano banana character, back view, standing straight, rear view, character design sheet, white background, even lighting, full body
+5. nano banana character, 3/4 front view, standing straight, character design sheet, white background, even lighting, full body
+6. nano banana character, 3/4 back view, standing straight, character design sheet, white background, even lighting, full body
+
+## MULTI-ANGLE SHEET (Single Image)
+7. nano banana character, multiple angle turnaround sheet, front side back views, character design reference, white background, clean layout, full body
+
+## FACIAL EXPRESSIONS & EMOTIONS
+8. nano banana character, happy expression, smiling, cheerful, portrait view, soft lighting, close-up face
+9. nano banana character, sad expression, downcast eyes, melancholic, portrait view, soft lighting, close-up face
+10. nano banana character, angry expression, furrowed brow, intense, portrait view, dramatic lighting, close-up face
+11. nano banana character, surprised expression, wide eyes, shocked, portrait view, bright lighting, close-up face
+12. nano banana character, confused expression, tilted head, puzzled look, portrait view, neutral lighting, close-up face
+13. nano banana character, excited expression, energetic, joyful, portrait view, bright lighting, close-up face
+14. nano banana character, tired expression, sleepy eyes, exhausted, portrait view, dim lighting, close-up face
+15. nano banana character, determined expression, focused eyes, serious, portrait view, dramatic lighting, close-up face
+
+## ACTION POSES
+16. nano banana character, running pose, dynamic action, motion blur, energetic, full body, side view
+17. nano banana character, jumping pose, mid-air, athletic, dynamic, full body, action shot
+18. nano banana character, sitting pose, relaxed position, casual, full body, front view
+19. nano banana character, crouching pose, low stance, sneaking, full body, side view
+20. nano banana character, walking pose, mid-stride, natural movement, full body, side view
+21. nano banana character, waving gesture, friendly greeting, standing, full body, front view
+22. nano banana character, pointing gesture, directing attention, confident stance, full body, 3/4 view
+23. nano banana character, crossed arms pose, confident stance, standing, full body, front view
+24. nano banana character, hands on hips pose, assertive stance, standing, full body, front view
+25. nano banana character, fighting stance, action ready, combat pose, full body, dynamic angle
+
+## LIGHTING VARIATIONS
+26. nano banana character, front view, dramatic side lighting, strong shadows, moody atmosphere, full body
+27. nano banana character, front view, rim lighting, glowing edges, dark background, full body
+28. nano banana character, front view, top lighting, overhead illumination, theatrical, full body
+29. nano banana character, front view, soft diffused lighting, gentle shadows, studio quality, full body
+30. nano banana character, front view, golden hour lighting, warm tones, sunset glow, full body
+31. nano banana character, front view, blue hour lighting, cool tones, twilight atmosphere, full body
+32. nano banana character, front view, neon lighting, vibrant colors, cyberpunk aesthetic, full body
+33. nano banana character, front view, candlelight, warm intimate lighting, soft glow, full body
+34. nano banana character, front view, spotlight, high contrast, stage lighting, full body
+35. nano banana character, front view, backlit silhouette, dramatic contrast, glowing outline, full body
+
+## ENVIRONMENTAL CONTEXTS
+36. nano banana character, standing in city street, urban environment, daytime, full body
+37. nano banana character, standing in forest, natural environment, dappled sunlight, full body
+38. nano banana character, standing indoors, room interior, window light, full body
+39. nano banana character, standing on rooftop, elevated view, sunset lighting, full body
+40. nano banana character, standing in rain, wet environment, moody atmosphere, full body
+
+## CHARACTER INTERACTIONS & SCALE
+41. nano banana character, next to size reference, height comparison chart, white background, full body
+42. nano banana character, with props, holding objects, interactive pose, full body
+43. nano banana character, dynamic action sequence, motion study, multiple frames, full body
+
+## DETAIL STUDIES
+44. nano banana character, upper body close-up, detailed clothing/features, portrait orientation
+45. nano banana character, lower body close-up, feet and legs detail, reference study
+46. nano banana character, hands detail study, gesture reference, close-up view
+
+## STYLISTIC VARIATIONS
+47. nano banana character, cel-shaded style, bold outlines, vibrant colors, full body
+48. nano banana character, painterly style, soft edges, artistic rendering, full body
+49. nano banana character, sketch style, line art, concept art feel, full body
+50. nano banana character, rendered style, high detail, polished finish, full body
+
+## NOTES FOR TRAINING:
+- Use "nano banana character" as consistent trigger word
+- Mix of full body, portrait, and detail shots for versatility
+- Include various lighting to improve model robustness
+- Multiple angles ensure good 3D understanding
+- Expression variety helps with facial control
+- Action poses add dynamic capability

@@ -1,0 +1,196 @@
+================================================================================
+CLIFF FALL BATCH GENERATION - MULTI-SEED WORKFLOW GUIDE
+================================================================================
+
+🎯 GOAL: Generate all 33 prompts with 4 different seeds (51, 42, 50, 43)
+📊 OUTPUT: 132 total images (33 prompts × 4 seeds)
+
+================================================================================
+SETUP
+================================================================================
+
+WORKFLOW FILE: cliff_fall_batch_multiseed.json
+
+This workflow runs ALL 4 SEEDS SIMULTANEOUSLY:
+- Seed 51 🎨 (6 proven winners - best landscapes)
+- Seed 42 🎭 (3 proven winners - best character action)
+- Seed 50 🌊 (3 proven winners - backup)
+- Seed 43 🔥 (3 proven winners - backup)
+
+Each seed generates in parallel, giving you 4 variations per prompt.
+
+================================================================================
+HOW TO USE
+================================================================================
+
+STEP 1: Load the workflow
+- Open ComfyUI at http://localhost:8188
+- Drag and drop: cliff_fall_batch_multiseed.json
+
+STEP 2: For each of the 33 frames:
+
+  a) Open the prompt file (e.g., Frame_01_START from ALL_PROMPTS_cliff_fall.txt)
+
+  b) Copy the prompt text
+
+  c) Paste into Node 4 (CLIPTextEncode - the big text box)
+
+  d) Click "Queue Prompt"
+
+  e) WAIT for all 4 seeds to finish generating
+     - You'll get 4 images at once
+     - cliff_fall_seed51_00001_.png
+     - cliff_fall_seed42_00001_.png
+     - cliff_fall_seed50_00001_.png
+     - cliff_fall_seed43_00001_.png
+
+  f) Move to next prompt and repeat
+
+STEP 3: Review and select
+- After generating all 33 × 4 = 132 images
+- Pick the BEST seed variation for each frame
+- Move selects to a "selects" folder
+
+================================================================================
+TIMING ESTIMATE
+================================================================================
+
+- Each seed takes ~30-60 seconds on RTX 3090
+- 4 seeds run in parallel = ~30-60 seconds per prompt
+- 33 prompts × 45 seconds average = ~25 minutes total
+- Plus time to copy/paste prompts = ~30-40 minutes total
+
+================================================================================
+ALTERNATIVE: SEQUENTIAL MODE
+================================================================================
+
+If parallel mode causes memory issues:
+
+1. Right-click on 3 of the 4 KSampler nodes
+2. Select "Bypass" to disable them
+3. Generate one seed at a time
+4. Enable different seed, repeat
+
+This takes 4× longer but uses less VRAM.
+
+================================================================================
+THE 33 PROMPTS (IN ORDER)
+================================================================================
+
+PART 1: THE FALL (24 frames)
+
+BEAT 1: Landscape to Cliff Reveal (2 frames)
+  ☐ Frame_01_START - Pure Landscape
+  ☐ Frame_01_END - Cliff Edge Revealed
+
+BEAT 2: Approach to Stillness (3 frames)
+  ☐ Frame_02_START - Distant Back View Walking
+  ☐ Frame_02_MIDDLE - Halfway There
+  ☐ Frame_02_END - At Edge Standing Still
+
+BEAT 3: Face Contemplation (3 frames)
+  ☐ Frame_03_START - Side Profile Looking Out
+  ☐ Frame_03_MIDDLE - Eyes Closing
+  ☐ Frame_03_END - Eyes Closed Peace
+
+BEAT 4: The Test (2 frames)
+  ☐ Frame_04_START - Both Feet Grounded
+  ☐ Frame_04_END - Foot Extended Over Void
+
+BEAT 5: The Leap (3 frames)
+  ☐ Frame_05_START - Last Moment on Ground
+  ☐ Frame_05_MIDDLE - Push Off
+  ☐ Frame_05_END - Airborne Released
+
+BEAT 6: Wide Epic Fall (3 frames)
+  ☐ Frame_06_START - Beginning Descent Near Cliff
+  ☐ Frame_06_MIDDLE - Mid-Fall
+  ☐ Frame_06_END - Deep in Fall
+
+BEAT 7: Silhouette Transformation (3 frames)
+  ☐ Frame_07_START - Lit Figure Falling
+  ☐ Frame_07_MIDDLE - Half Silhouette
+  ☐ Frame_07_END - Pure Silhouette Backlit
+
+BEAT 8: Spinning Grace (2 frames)
+  ☐ Frame_08_START - Silhouette Vertical
+  ☐ Frame_08_END - Spinning Horizontal
+
+BEAT 9: Into Forever (3 frames)
+  ☐ Frame_09_START - Mid-Atmosphere Fall
+  ☐ Frame_09_MIDDLE - Deeper Atmosphere
+  ☐ Frame_09_END - Forever Fall (BEGIN FADE)
+
+PART 2: THE WALK AWAY (9 frames)
+
+BEAT 10: Return to Edge (3 frames)
+  ☐ Frame_10_START - Empty Cliff Edge (FADE IN)
+  ☐ Frame_10_MIDDLE - Faint Silhouette Appearing
+  ☐ Frame_10_END - She Stands There Solid
+
+BEAT 11: The Turn (3 frames)
+  ☐ Frame_11_START - Looking Out
+  ☐ Frame_11_MIDDLE - Mid Turn
+  ☐ Frame_11_END - Turned Away
+
+BEAT 12: Walking Away (3 frames)
+  ☐ Frame_12_START - First Steps
+  ☐ Frame_12_MIDDLE - Walking Mid Distance
+  ☐ Frame_12_END - Exit Frame (FADE OUT)
+
+================================================================================
+SEED STRATEGY (Based on your proven winners)
+================================================================================
+
+After reviewing all 132 images, you might find patterns like:
+
+Seed 51 🎨 - Best for:
+  - Wide landscape shots
+  - Establishing scenes
+  - Atmospheric depth
+  - Proven winner for Frame_01_START type shots
+
+Seed 42 🎭 - Best for:
+  - Character action moments
+  - Dynamic poses
+  - The leap and fall sequences
+  - Proven winner for Frame_05 type shots
+
+Seed 50 🌊 - Best for:
+  - Atmospheric effects
+  - Cloud layers
+  - Sky scenes
+
+Seed 43 🔥 - Best for:
+  - Dramatic lighting
+  - Silhouettes
+  - Sunset scenes
+
+You can then use this knowledge for future generations!
+
+================================================================================
+FINAL SELECTS WORKFLOW
+================================================================================
+
+After picking your best 33 images:
+
+1. Rename them sequentially:
+   - cliff_fall_FINAL_01_START.png
+   - cliff_fall_FINAL_01_END.png
+   - etc.
+
+2. Use frame interpolation (RIFE/FILM) to create smooth animation
+
+3. Edit in video editor:
+   - Part 1 Forward: 15-20 seconds
+   - VCR Rewind: 3 seconds
+   - Part 2 Walk Away: 8-12 seconds
+   - TOTAL: ~26-35 seconds
+
+================================================================================
+
+HAPPY GENERATING! 🎨🏔️
+
+NO MISTAKES, JUST HAPPY LITTLE MULTI-SEED VARIATIONS!
+
+================================================================================

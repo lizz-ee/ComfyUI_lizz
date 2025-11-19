@@ -1,0 +1,130 @@
+================================================================================
+PROMPT FILES - ORIGINAL VS PURPLE RIM ENHANCED
+================================================================================
+
+You now have TWO versions of the cliff fall prompts to test:
+
+================================================================================
+📁 FILE 1: ALL_PROMPTS_cliff_fall.txt (ORIGINAL)
+================================================================================
+
+Original prompts as created.
+
+Purple rim lighting: Mentioned in some frames but not consistent
+
+Best for: Testing if subtle/natural lighting works with IP-Adapter
+
+Character mentions:
+  ✓ "lizzchar woman with purple streaks in dark hair"
+  ✓ Some frames mention "dramatic neon rim lighting"
+  - Not all frames have purple glow
+
+Example (Frame_02_START ORIGINAL):
+  "lizzchar woman with purple streaks in dark hair, distant full body from behind,
+  walking toward cliff edge... warm atmospheric glow... vibrant color palette..."
+
+================================================================================
+📁 FILE 2: ALL_PROMPTS_cliff_fall_PURPLE_RIM.txt (ENHANCED)
+================================================================================
+
+Enhanced with STRONG purple-blue neon rim lighting throughout all character frames.
+
+Purple rim lighting: Added to EVERY character frame, multiple mentions
+
+Best for: Strong Arcane aesthetic with consistent glowing edges
+
+Enhancements added:
+  ✅ "dramatic purple-blue neon rim lighting" added to character intro
+  ✅ "Arcane-style glowing purple edges" added
+  ✅ "warm atmospheric glow with purple rim highlights"
+  ✅ "vibrant color palette with purple accents"
+  ✅ Extra "glowing purple edges" on close-ups
+
+Example (Frame_02_START ENHANCED):
+  "lizzchar woman with purple streaks in dark hair and dramatic purple-blue neon
+  rim lighting, distant full body from behind, walking toward cliff edge...
+  warm atmospheric glow with purple rim highlights... vibrant color palette
+  with purple accents..."
+
+================================================================================
+COMPARISON BY FRAME TYPE
+================================================================================
+
+LANDSCAPE ONLY (Frame_01_START):
+  Original:  No character, no changes
+  Enhanced:  No character, no changes (identical)
+
+DISTANT CHARACTER (Frame_02_START):
+  Original:  "lizzchar woman with purple streaks in dark hair"
+  Enhanced:  "lizzchar woman with purple streaks in dark hair and dramatic
+             purple-blue neon rim lighting"
+
+CLOSE-UPS (Frame_03_START):
+  Original:  "dramatic neon rim lighting on hair edge"
+  Enhanced:  "dramatic purple-blue neon rim lighting wrapping around hair
+             edge and profile, Arcane-style glowing purple edges"
+
+SILHOUETTES (Frame_07_END):
+  Original:  "golden rim lighting creating halo effect"
+  Enhanced:  "golden rim lighting with subtle purple atmospheric glow on
+             edges creating halo effect"
+
+================================================================================
+HOW TO USE EACH VERSION
+================================================================================
+
+TO RUN ORIGINAL VERSION:
+  1. Make sure PROMPTS_FILE in script points to:
+     PROMPTS_FILE = Path(__file__).parent / "prompts" / "ALL_PROMPTS_cliff_fall.txt"
+  2. Run: python generate_cliff_fall.py --single
+  3. Output: D:\ComfyUI_lizz\output\fall\Seed_XX\v001\
+
+TO RUN PURPLE RIM VERSION:
+  1. Edit generate_cliff_fall.py line 20:
+     PROMPTS_FILE = Path(__file__).parent / "prompts" / "ALL_PROMPTS_cliff_fall_PURPLE_RIM.txt"
+  2. Run: python generate_cliff_fall.py --single
+  3. Output: D:\ComfyUI_lizz\output\fall\Seed_XX\v002\ (auto-increments!)
+
+TO RUN BOTH (RECOMMENDED):
+  1. Run original first → generates v001
+  2. Edit script to point to PURPLE_RIM version
+  3. Run again → generates v002
+  4. Compare v001 vs v002 to see which lighting works better!
+
+================================================================================
+EXPECTED DIFFERENCES
+================================================================================
+
+ORIGINAL VERSION:
+  ✓ More subtle, natural lighting
+  ✓ Purple in hair but not necessarily glowing edges
+  ✓ Might blend better with Bob Ross aesthetic
+  ✓ Less "Arcane-style" but more painterly
+
+PURPLE RIM VERSION:
+  ✓ Strong Arcane-style neon glow
+  ✓ Purple-blue edges on hair, shoulders, profile
+  ✓ More dramatic, stylized lighting
+  ✓ Consistent purple accents throughout all frames
+
+================================================================================
+RECOMMENDATION
+================================================================================
+
+Generate BOTH versions and compare!
+
+The enhanced purple rim version should give you that signature Arcane look with
+glowing edges, while the original is more subtle and painterly.
+
+After seeing both, you can decide which aesthetic works better for your project,
+or even mix and match (use enhanced for close-ups, original for wide shots).
+
+Each run creates a new version folder, so nothing gets overwritten! 🎨
+
+================================================================================
+
+BOTH FILES READY TO USE!
+- ALL_PROMPTS_cliff_fall.txt (original, subtle)
+- ALL_PROMPTS_cliff_fall_PURPLE_RIM.txt (enhanced, strong purple glow)
+
+================================================================================

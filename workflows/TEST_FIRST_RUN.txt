@@ -1,0 +1,172 @@
+================================================================================
+FIRST TEST RUN - QUICK START GUIDE
+================================================================================
+
+🎯 Let's test the script with just 1 frame first to make sure everything works!
+
+================================================================================
+STEP 1: START COMFYUI
+================================================================================
+
+1. Open ComfyUI (if not already running)
+2. Go to: http://127.0.0.1:8188
+3. Keep it open in the background
+
+================================================================================
+STEP 2: TEST RUN (SINGLE FRAME ONLY)
+================================================================================
+
+Open the script and temporarily modify it to test just 1 frame:
+
+FILE: D:\ComfyUI_lizz\workflows\generate_cliff_fall.py
+
+Find this line (around line 250):
+    prompts, negative_prompt = parse_prompts_file(PROMPTS_FILE)
+
+Add this line RIGHT AFTER it:
+    prompts = prompts[:1]  # TEST: Only generate first frame
+
+This will generate only Frame_01_START × 4 seeds = 4 images total
+
+================================================================================
+STEP 3: RUN THE SCRIPT
+================================================================================
+
+Open Command Prompt or PowerShell:
+
+cd D:\ComfyUI_lizz\workflows
+python generate_cliff_fall.py --single
+
+You should see:
+
+╔════════════════════════════════════════════════════════════════════════╗
+║         CLIFF FALL SEQUENCE - AUTOMATED BATCH GENERATOR               ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+🐌 Running in SINGLE mode (one seed at a time)
+
+📖 Reading prompts...
+✅ Found 33 prompts
+🎲 Seeds: [51, 42, 50, 43]
+📊 Total generations: 132
+
+🔧 Loading workflow template...
+✅ Loaded: cliff_fall_ipadapter_multiseed.json
+
+🔌 Testing ComfyUI connection...
+✅ Connected to ComfyUI
+
+📁 Checking for existing versions...
+  Seed 51: v001 → D:\ComfyUI_lizz\output\fall\Seed_51\v001
+  Seed 42: v001 → D:\ComfyUI_lizz\output\fall\Seed_42\v001
+  Seed 50: v001 → D:\ComfyUI_lizz\output\fall\Seed_50\v001
+  Seed 43: v001 → D:\ComfyUI_lizz\output\fall\Seed_43\v001
+
+🚀 Starting generation...
+================================================================================
+
+[1/1] Frame_01_START - Pure Landscape  ← Only 1 frame because of test limit
+  🎲 Seed 51 v001... ✅  ← Wait ~30 seconds
+  🎲 Seed 42 v001... ✅  ← Wait ~30 seconds
+  🎲 Seed 50 v001... ✅  ← Wait ~30 seconds
+  🎲 Seed 43 v001... ✅  ← Wait ~30 seconds
+
+================================================================================
+🎉 GENERATION COMPLETE!
+================================================================================
+✅ Successfully generated: 4
+❌ Failed: 0
+⏱️  Total time: 2.5 minutes
+📊 Average per image: 37.5 seconds
+
+📁 Check output in: D:\ComfyUI_lizz\output\
+
+================================================================================
+STEP 4: CHECK THE OUTPUT
+================================================================================
+
+Navigate to: D:\ComfyUI_lizz\output\fall\
+
+You should see:
+
+fall\
+├── Seed_51\
+│   └── v001\
+│       └── cliff_51_Frame_01_START_v001.png
+├── Seed_42\
+│   └── v001\
+│       └── cliff_42_Frame_01_START_v001.png
+├── Seed_50\
+│   └── v001\
+│       └── cliff_50_Frame_01_START_v001.png
+└── Seed_43\
+    └── v001\
+        └── cliff_43_Frame_01_START_v001.png
+
+Open the images and verify:
+✅ Same cliff/landscape background (from cleanplate)
+✅ Proper naming (cliff_SEED_FRAMEID_vVER.png)
+✅ Good quality Bob Ross + Arcane style
+✅ Files in correct folders
+
+================================================================================
+STEP 5: IF TEST PASSED - RUN FULL BATCH
+================================================================================
+
+Remove the test line you added:
+    prompts = prompts[:1]  # TEST: Only generate first frame
+    ^^^^^^^^^^^^^^^^^^^^^^ DELETE THIS LINE
+
+Save the file.
+
+Run the full generation:
+python generate_cliff_fall.py --single
+
+This will generate all 33 × 4 = 132 images (~45-60 minutes)
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+❌ "Cannot connect to ComfyUI"
+   → Make sure ComfyUI is running at http://127.0.0.1:8188
+   → Open it in browser to verify
+
+❌ "Module not found: requests"
+   → Install: pip install requests
+
+❌ "No prompts found"
+   → Check file exists: D:\ComfyUI_lizz\workflows\prompts\ALL_PROMPTS_cliff_fall.txt
+
+❌ Images not generating / timeout
+   → Check ComfyUI console for errors
+   → Verify cleanplate exists: D:\ComfyUI_lizz\input\cliff_cleanplate.png
+   → Verify LoRA exists: models/loras/lizzchar_lora.safetensors
+
+❌ Images look wrong / no character
+   → Lower IP-Adapter weight in script (change 0.45 to 0.35)
+
+❌ Background doesn't match cleanplate
+   → Raise IP-Adapter weight (change 0.45 to 0.55)
+
+================================================================================
+WHAT TO EXPECT
+================================================================================
+
+Generation Time:
+- Each image: ~30-60 seconds
+- Test run (4 images): ~2-5 minutes
+- Full run (132 images): ~45-60 minutes
+
+VRAM Usage:
+- Single mode: ~12-16GB per generation
+- Should be fine for RTX 3090 24GB
+
+================================================================================
+
+GOOD LUCK! 🚀
+
+Once the test passes, you're ready to run the full batch and generate all 132
+images automatically!
+
+================================================================================

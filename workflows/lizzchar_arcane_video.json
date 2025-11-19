@@ -1,0 +1,195 @@
+{
+  "last_node_id": 15,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [50, 100],
+      "size": [315, 98],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [2], "slot_index": 1},
+        {"name": "VAE", "type": "VAE", "links": [8], "slot_index": 2}
+      ],
+      "properties": {"Node name for S&R": "CheckpointLoaderSimple"},
+      "widgets_values": ["arcane-diffusion-v3.ckpt"]
+    },
+    {
+      "id": 13,
+      "type": "LoraLoader",
+      "pos": [400, 100],
+      "size": [315, 126],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 1},
+        {"name": "clip", "type": "CLIP", "link": 2}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [16], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [17, 18], "slot_index": 1}
+      ],
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["lizzchar_lora.safetensors", 0.8, 0.8]
+    },
+    {
+      "id": 2,
+      "type": "CLIPTextEncode",
+      "pos": [750, 100],
+      "size": [400, 200],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 17}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [4], "slot_index": 0}],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["lizzchar, arcane style, lime green skin, spiky teal hair with purple streaks, olive green hoodie, character slowly turning head, smooth motion, dramatic lighting, cyberpunk city background, cinematic"]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [750, 350],
+      "size": [400, 200],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 18}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [5], "slot_index": 0}],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["realistic, photorealistic, 3d render, blurry, low quality, watermark, text, deformed, static, flickering, inconsistent character, wrong colors, different character"]
+    },
+    {
+      "id": 14,
+      "type": "EmptyLatentImage",
+      "pos": [750, 600],
+      "size": [315, 106],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [19], "slot_index": 0}],
+      "properties": {"Node name for S&R": "EmptyLatentImage"},
+      "widgets_values": [512, 512, 1]
+    },
+    {
+      "id": 7,
+      "type": "RepeatLatentBatch",
+      "pos": [1100, 600],
+      "size": [315, 58],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 19}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [13], "slot_index": 0}],
+      "properties": {"Node name for S&R": "RepeatLatentBatch"},
+      "widgets_values": [24]
+    },
+    {
+      "id": 8,
+      "type": "ADE_AnimateDiffLoaderGen1",
+      "pos": [1200, 100],
+      "size": [315, 78],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 16}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [6], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "ADE_AnimateDiffLoaderGen1"},
+      "widgets_values": ["v3_sd15_mm.ckpt"]
+    },
+    {
+      "id": 9,
+      "type": "KSampler",
+      "pos": [1550, 100],
+      "size": [315, 262],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 6},
+        {"name": "positive", "type": "CONDITIONING", "link": 4},
+        {"name": "negative", "type": "CONDITIONING", "link": 5},
+        {"name": "latent_image", "type": "LATENT", "link": 13}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [14], "slot_index": 0}],
+      "properties": {"Node name for S&R": "KSampler"},
+      "widgets_values": [42, "fixed", 25, 7.5, "euler", "normal", 1.0]
+    },
+    {
+      "id": 10,
+      "type": "VAEDecode",
+      "pos": [1900, 100],
+      "size": [210, 46],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 14},
+        {"name": "vae", "type": "VAE", "link": 8}
+      ],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [15], "slot_index": 0}],
+      "properties": {"Node name for S&R": "VAEDecode"}
+    },
+    {
+      "id": 11,
+      "type": "VHS_VideoCombine",
+      "pos": [2150, 100],
+      "size": [315, 290],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 15}
+      ],
+      "properties": {"Node name for S&R": "VHS_VideoCombine"},
+      "widgets_values": {
+        "frame_rate": 12,
+        "loop_count": 0,
+        "filename_prefix": "lizzchar_arcane_video",
+        "format": "video/h264-mp4",
+        "crf": 20,
+        "save_metadata": true
+      }
+    },
+    {
+      "id": 15,
+      "type": "Note",
+      "pos": [50, 750],
+      "size": [800, 450],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "properties": {"text": ""},
+      "widgets_values": ["LIZZCHAR + ARCANE STYLE VIDEO GENERATION\n\nThis workflow combines your trained lizzchar LoRA with Arcane style for video!\n\nWHAT'S HAPPENING:\n1. Arcane Diffusion V3 checkpoint (base style)\n2. lizzchar LoRA loaded at 0.8 strength (your character)\n3. AnimateDiff adds motion across 24 frames\n4. Output: MP4 video with your character in Arcane style\n\nKEY SETTINGS:\n\nLoRA Strength: 0.8\n- Higher (0.9-1.0) = More character accuracy\n- Lower (0.6-0.7) = More style flexibility\n\nFrames: 24 (via RepeatLatentBatch)\n- 24 frames at 12fps = 2 seconds\n- Increase to 48 for 4 seconds\n\nPrompt: Must include 'lizzchar' trigger word!\n- Example: 'lizzchar, arcane style, walking forward, dramatic lighting'\n\nDenoise: 1.0 (text-to-video mode)\n- For img2video: use 0.6-0.8 instead\n\nSTEPS TO USE:\n1. Make sure lizzchar_lora.safetensors is in models/loras/\n2. Adjust prompt to describe the motion you want\n3. Queue Prompt!\n4. Video saves to: output/lizzchar_arcane_video_*.mp4\n\nTIPS:\n- Try different checkpoints: _000001000, _000001500, etc.\n- Add motion keywords: 'turning head', 'walking', 'waving'\n- Combine with ControlNet for precise motion control\n- Lower frame rate (8-12fps) for animated feel\n- Higher frame rate (24fps) for smooth cinematic feel"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 13, 0, "MODEL"],
+    [2, 1, 1, 13, 1, "CLIP"],
+    [4, 2, 0, 9, 1, "CONDITIONING"],
+    [5, 3, 0, 9, 2, "CONDITIONING"],
+    [6, 8, 0, 9, 0, "MODEL"],
+    [8, 1, 2, 10, 1, "VAE"],
+    [13, 7, 0, 9, 3, "LATENT"],
+    [14, 9, 0, 10, 0, "LATENT"],
+    [15, 10, 0, 11, 0, "IMAGE"],
+    [16, 13, 0, 8, 0, "MODEL"],
+    [17, 13, 1, 2, 0, "CLIP"],
+    [18, 13, 1, 3, 0, "CLIP"],
+    [19, 14, 0, 7, 0, "LATENT"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

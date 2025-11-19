@@ -1,0 +1,314 @@
+================================================================================
+CLIFF FALL - ALL PROMPTS (33 KEYFRAMES)
+Bob Ross Meets Arcane | 1024x720
+================================================================================
+
+⚠️ IMPORTANT: GENERATE SCENE MASTERS FIRST!
+See SCENE_MASTERS_prompts.txt - generate 4 background reference images first,
+then use with IP-Adapter for scenery consistency.
+
+SETTINGS FOR ALL FRAMES:
+- Resolution: 1024x720
+- Model: FLUX Dev FP8
+- LoRA: lizzchar_lora.safetensors @ 0.85
+- Steps: 20
+- CFG: 1.0
+- Sampler: euler
+- Scheduler: simple
+- IP-Adapter: Load Scene Master (weight 0.4-0.5)
+
+================================================================================
+PART 1: THE FALL SEQUENCE (24 FRAMES)
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 1: LANDSCAPE TO CLIFF REVEAL (2 frames, 3-4 seconds)
+WAN Start-End recommended
+🎨 IP-Adapter: Use SCENE_MASTER_A
+--------------------------------------------------------------------------------
+
+Frame_01_START - Pure Landscape
+
+vast Bob Ross landscape, happy little trees covering valleys, misty mountain layers in distance, dramatic sunset clouds with warm oranges and cool purples, tiny cliff edge barely visible in right side of frame, no person visible, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm golden hour glow, rich oil paint texture, epic scale vista, cinematic composition, vibrant color palette with warm oranges and cool blues, masterful blending, high quality, serene untouched nature, peaceful, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_01_END - Cliff Edge Revealed
+
+Bob Ross landscape with massive cliff edge prominent in foreground right, small silhouette of lizzchar woman with purple streaks in dark hair standing at very edge, tiny figure against vast expanse, happy little trees far below in valleys, misty mountain layers, distant peaks, dramatic sunset clouds, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric golden hour glow, rich oil paint texture, massive scale showing extreme height, cinematic composition, vibrant oranges and purples, masterful blending, high quality, vertigo perspective, lone figure revealed, contemplative, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 2: APPROACH TO STILLNESS (3 frames, 2-3 seconds)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_A
+--------------------------------------------------------------------------------
+
+Frame_02_START - Distant Back View Walking
+
+lizzchar woman with purple streaks in dark hair, distant full body from behind, walking toward cliff edge, several steps away from the edge, mid-stride with one foot forward, wind moving her hair and clothes, approaching the precipice, Bob Ross landscape spreading below with happy little trees, dramatic sky, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, figure in motion, walking, cinematic composition, vibrant color palette, masterful blending, high quality, approaching the moment, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_02_MIDDLE - Halfway There
+
+lizzchar woman with purple streaks in dark hair, medium-full body from behind, walking toward cliff edge, closer now just two steps from edge, different stride position, wind moving her hair and clothes, nearly arrived, Bob Ross landscape spreading below with happy little trees, dramatic sky, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, figure in motion, walking, cinematic composition, vibrant color palette, masterful blending, high quality, nearly there, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_02_END - At Edge Standing Still
+
+lizzchar woman with purple streaks in dark hair, medium shot from behind, standing perfectly still at cliff edge, right at the precipice, feet together, arms at sides, wind moving her hair and clothes gently, stopped at the edge, looking out over Bob Ross landscape with happy little trees and valleys below, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, stillness achieved, cinematic composition, vibrant color palette, masterful blending, high quality, contemplative moment, arrived, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 3: FACE CONTEMPLATION (3 frames, 3-4 seconds)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_A
+--------------------------------------------------------------------------------
+
+Frame_03_START - Side Profile Looking Out
+
+extreme close up of lizzchar woman with purple streaks in dark hair, side profile, eyes open looking into distance at horizon, neutral contemplative expression, wind gently moving hair strands, Bob Ross landscape soft and blurred in background, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dramatic neon rim lighting on hair edge, warm atmospheric glow, rich oil paint texture, detailed facial features with soft edges, cinematic composition, vibrant color palette, masterful blending, high quality, observing, considering, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_03_MIDDLE - Eyes Closing
+
+extreme close up of lizzchar woman with purple streaks in dark hair, side profile, eyes half-closed, expression beginning to soften, hint of emotion, wind gently moving hair strands, Bob Ross landscape soft and blurred in background, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dramatic neon rim lighting on hair edge, warm atmospheric glow, rich oil paint texture, detailed facial features with soft edges, cinematic composition, vibrant color palette, masterful blending, high quality, transition moment, letting go, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_03_END - Eyes Closed Peace
+
+extreme close up of lizzchar woman with purple streaks in dark hair, side profile, eyes gently closed, peaceful expression, slight hint of sadness mixed with acceptance, wind gently moving hair strands, Bob Ross landscape soft and blurred in background, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dramatic neon rim lighting on hair edge, warm atmospheric glow, rich oil paint texture, detailed facial features with soft edges, cinematic composition, vibrant color palette, masterful blending, high quality, decision made, acceptance, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 4: THE TEST (2 frames, 1.5-2 seconds)
+WAN Start-End recommended
+🎨 IP-Adapter: Use SCENE_MASTER_A
+--------------------------------------------------------------------------------
+
+Frame_04_START - Both Feet Grounded
+
+lizzchar woman with purple streaks in dark hair, three-quarter view from side, standing with both feet on solid ground at cliff edge, weight balanced, arms at sides, body still, cliff edge visible, Bob Ross landscape far below with happy little trees, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, grounded, cinematic composition, vibrant color palette, masterful blending, high quality, before movement, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_04_END - Foot Extended Over Void
+
+lizzchar woman with purple streaks in dark hair, three-quarter view from side, one foot extended over cliff edge into empty air, hanging over nothingness, body balanced on precipice, testing the void, Bob Ross landscape far below with happy little trees, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dramatic lighting on extended leg, warm atmospheric glow, rich oil paint texture, tension in pose, cinematic composition, vibrant color palette, masterful blending, high quality, testing fate, hovering, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 5: THE LEAP (3 frames, 1-1.5 seconds)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_A
+--------------------------------------------------------------------------------
+
+Frame_05_START - Last Moment on Ground
+
+lizzchar woman with purple streaks in dark hair, full body from side, both feet still on cliff edge, weight shifting forward onto toes, arms beginning to lift from sides, leaning into the void, cliff face visible behind, Bob Ross landscape below, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, tension building, warm sunset glow, rich oil paint texture, last moment of contact, cinematic composition, vibrant color palette, masterful blending, high quality, the instant before, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_05_MIDDLE - Push Off
+
+lizzchar woman with purple streaks in dark hair, full body from side, toes just leaving cliff edge, legs pushing, arms lifting to mid-height, hair beginning to flow upward, body in transition between earth and air, cliff face visible behind, Bob Ross landscape below, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dynamic motion, warm sunset glow, rich oil paint texture, the push, cinematic composition, vibrant color palette, masterful blending, high quality, launch moment, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_05_END - Airborne Released
+
+lizzchar woman with purple streaks in dark hair, full body in air clearly off cliff edge, arms spreading wide, hair flowing upward, feet clear of ground, body fully released into space, cliff face visible behind, Bob Ross landscape below, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dynamic motion, warm sunset glow, rich oil paint texture, freedom, cinematic composition, vibrant color palette, masterful blending, high quality, release, liberation, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 6: WIDE EPIC FALL (3 frames, 3-4 seconds)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_A (transitioning to B)
+--------------------------------------------------------------------------------
+
+Frame_06_START - Beginning Descent Near Cliff
+
+lizzchar woman with purple streaks in dark hair, full body figure in freefall close to cliff, arms spread wide, massive cliff face taking up half frame on left, vast Bob Ross landscape spreading below with happy little trees and valleys, just beginning the fall, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, epic scale, warm golden atmosphere, rich oil paint texture, cinematic composition, vibrant color palette, masterful blending, high quality, descent begins, still near cliff, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_06_MIDDLE - Mid-Fall
+
+lizzchar woman with purple streaks in dark hair, medium-small full body figure in freefall away from cliff, arms spread wide, massive cliff face distant to side, vast Bob Ross landscape spreading below with happy little trees and valleys getting closer, falling through the air, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, epic scale, warm golden atmosphere, rich oil paint texture, figure getting smaller, cinematic composition, vibrant color palette, masterful blending, high quality, mid descent, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_06_END - Deep in Fall
+
+lizzchar woman with purple streaks in dark hair, small full body figure in freefall far from cliff, arms spread wide, massive cliff face distant above in background, vast Bob Ross landscape spreading below with happy little trees and valleys appearing much closer, falling through the air, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, epic scale, warm golden atmosphere, rich oil paint texture, tiny figure against massive landscape, cinematic composition, vibrant color palette, masterful blending, high quality, deep descent, accelerating, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 7: SILHOUETTE TRANSFORMATION (3 frames, 2-3 seconds)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_B
+--------------------------------------------------------------------------------
+
+Frame_07_START - Lit Figure Falling
+
+lizzchar woman with purple streaks in dark hair, full body in freefall, arms spread wide, fully lit with visible details in face and clothing, dramatic Bob Ross sunset behind and to side at 45 degrees, warm colors illuminating her, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, dramatic clouds and sky with happy little clouds, cinematic composition, vibrant color palette with oranges and purples, masterful blending, high quality, full light, details visible, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_07_MIDDLE - Half Silhouette
+
+lizzchar woman with purple streaks in dark hair, full body in freefall, arms spread wide, partially backlit, half her body in shadow, dramatic Bob Ross sunset more directly behind her now, transitioning to silhouette, some details still visible, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, rim lighting beginning, warm atmospheric glow, rich oil paint texture, dramatic clouds and sky with happy little clouds, cinematic composition, vibrant color palette with oranges and purples, masterful blending, high quality, transition to silhouette, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_07_END - Pure Silhouette Backlit
+
+lizzchar woman silhouette in freefall, completely backlit by dramatic Bob Ross sunset directly behind her, arms spread wide like wings, purple hair streaks visible only as dark shapes, figure in pure silhouette, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, golden rim lighting creating halo effect, warm atmospheric glow, rich oil paint texture, dramatic clouds and sky with happy little clouds, cinematic composition, vibrant color palette with oranges and purples, masterful blending, high quality, iconic silhouette, transcendent, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 8: SPINNING GRACE (2 frames, 1.5-2 seconds)
+WAN Start-End recommended
+🎨 IP-Adapter: Use SCENE_MASTER_C
+--------------------------------------------------------------------------------
+
+Frame_08_START - Silhouette Vertical
+
+lizzchar woman silhouette in freefall, body vertical orientation, arms spread wide, purple hair flowing upward, Bob Ross landscape blurred in background with happy little clouds, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, golden rim lighting, warm atmospheric glow, rich oil paint texture, vertical falling pose, cinematic composition, vibrant color palette, masterful blending, high quality, upright position, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_08_END - Spinning Horizontal
+
+lizzchar woman with purple streaks in dark hair, full body in freefall, body rotated to near horizontal orientation, arms spread like wings, mid-spin, purple hair flowing around head, Bob Ross landscape blurred in background with happy little clouds, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dramatic lighting wrapping around body, warm atmospheric glow, rich oil paint texture, motion in hair and clothes, cinematic composition, vibrant color palette, masterful blending, high quality, graceful rotation, dance with gravity, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 9: INTO FOREVER (3 frames, 3-4 seconds)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_C
+--------------------------------------------------------------------------------
+
+Frame_09_START - Mid-Atmosphere Fall
+
+lizzchar woman with purple streaks in dark hair, full body in freefall, arms spread wide, surrounded by clouds at middle altitude, layers of atmosphere visible above and below, Bob Ross landscape still visible below with happy little trees, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, falling through clouds, cinematic composition, vibrant color palette, masterful blending, high quality, mid descent, journey continues, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_09_MIDDLE - Deeper Atmosphere
+
+lizzchar woman with purple streaks in dark hair, full body in endless freefall, more layers of clouds surrounding, perspective beginning to compress, landscape further below, more atmospheric depth, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dramatic atmospheric layers, warm glow, rich oil paint texture, more infinite feeling, happy little clouds passing by, cinematic composition, vibrant color palette, masterful blending, high quality, deeper descent, peaceful, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_09_END - Forever Fall (BEGIN FADE)
+
+lizzchar woman with purple streaks in dark hair, full body in endless freefall, compressed perspective showing many layers of clouds and atmosphere, never-ending descent, landscape barely visible far below, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, dramatic atmospheric layers, warm glow transitioning to cool depth, rich oil paint texture, infinite space above and below, happy little clouds passing by, cinematic composition, vibrant color palette, masterful blending, high quality, eternal moment, forever falling, peaceful, beginning to fade, 1024x720
+
+================================================================================
+PART 2: THE WALK AWAY (9 FRAMES)
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 10: RETURN TO EDGE (3 frames, 3-4 seconds, FADE IN)
+AnimateDiff or WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_D
+--------------------------------------------------------------------------------
+
+Frame_10_START - Empty Cliff Edge (FADE IN)
+
+cliff edge empty, no person, Bob Ross landscape spreading below with happy little trees and valleys, wind moving grasses at cliff edge, dramatic sky with sunset colors fading to dusk, different camera angle than Part 1 opening, three-quarter view, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow fading, rich oil paint texture, peaceful emptiness, cinematic composition, vibrant color palette, masterful blending, high quality, quiet moment, fading in from black, empty, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_10_MIDDLE - Faint Silhouette Appearing
+
+cliff edge with faint ghostly silhouette of lizzchar woman beginning to appear, translucent, materializing, Bob Ross landscape spreading below with happy little trees and valleys, wind moving grasses, dramatic sky, three-quarter view, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, ghostly appearance, cinematic composition, vibrant color palette, masterful blending, high quality, appearing, returning, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_10_END - She Stands There Solid
+
+lizzchar woman with purple streaks in dark hair, standing solid at cliff edge, three-quarter view from behind and slightly to side, different angle from Part 1, fully materialized now, looking out over Bob Ross landscape with happy little trees, wind moving hair and clothes, same cliff but different perspective, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, contemplative stillness, she has returned, cinematic composition, vibrant color palette, masterful blending, high quality, back to reality, present, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 11: THE TURN (3 frames, 2-3 seconds)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_D
+--------------------------------------------------------------------------------
+
+Frame_11_START - Looking Out
+
+lizzchar woman with purple streaks in dark hair, close-up from behind and side, head facing forward looking out over landscape, shoulders square to the vista, wind in her hair, Bob Ross landscape in background with happy little trees, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow, rich oil paint texture, still gazing at the view, cinematic composition, vibrant color palette, masterful blending, high quality, last look, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_11_MIDDLE - Mid Turn
+
+lizzchar woman with purple streaks in dark hair, close-up from behind and side, head partially turned, profile visible, shoulders beginning to rotate, hair in motion with the turn, Bob Ross landscape visible to side in background, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, natural movement, warm atmospheric glow, rich oil paint texture, turning away, cinematic composition, vibrant color palette, masterful blending, high quality, in motion, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_11_END - Turned Away
+
+lizzchar woman with purple streaks in dark hair, close-up from behind, head turned away from cliff looking back toward land, shoulders rotated, hair settling from the turn, Bob Ross landscape now behind to the side, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, natural movement, warm atmospheric glow, rich oil paint texture, decision to return to life, turned away from the void, cinematic composition, vibrant color palette, masterful blending, high quality, choosing life, 1024x720
+
+================================================================================
+
+--------------------------------------------------------------------------------
+BEAT 12: WALKING AWAY (3 frames, 3-4 seconds, FADE OUT)
+WAN Multi-Keyframe recommended
+🎨 IP-Adapter: Use SCENE_MASTER_D
+--------------------------------------------------------------------------------
+
+Frame_12_START - First Steps
+
+lizzchar woman with purple streaks in dark hair, medium-full shot from behind, body fully turned away from cliff edge, taking first steps away, confident stride beginning, one foot forward, cliff edge visible behind her, Bob Ross scenery surrounding with happy little trees, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, purposeful movement, warm atmospheric glow, rich oil paint texture, walking away from the edge, cinematic composition, vibrant color palette, masterful blending, high quality, departure begins, moving forward, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_12_MIDDLE - Walking Mid Distance
+
+lizzchar woman with purple streaks in dark hair, full body from behind, walking away from camera, medium distance now, several steps taken, confident stride mid-motion, cliff edge further behind, Bob Ross scenery surrounding with happy little trees and paths, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, confident stride, warm atmospheric glow, rich oil paint texture, walking into her future, getting smaller, cinematic composition, vibrant color palette, masterful blending, high quality, continuing, 1024x720
+
+--------------------------------------------------------------------------------
+
+Frame_12_END - Exit Frame (FADE OUT)
+
+lizzchar woman with purple streaks in dark hair, full body from behind, walking away from camera into the landscape, much smaller in frame now, many steps taken, moving into the distance, cliff edge far behind, Bob Ross scenery surrounding with happy little trees and winding paths, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, confident stride, warm atmospheric glow, rich oil paint texture, walking into her future, very small now, cinematic composition, vibrant color palette, masterful blending, high quality, departure, hope, fading to end, continuing journey, 1024x720
+
+================================================================================
+
+NEGATIVE PROMPT (USE FOR ALL FRAMES):
+
+blurry, low quality, distorted face, watermark, text, multiple heads, bad anatomy, photorealistic, photograph, jpeg artifacts, ground, landing, impact, fear, panic, falling apart, distorted limbs, bad proportions, deformed, mutated, disfigured, extra limbs, missing limbs, floating limbs, disconnected limbs, malformed hands, poorly drawn hands, poorly drawn face, mutation, ugly, disgusting, bad art, amateur, lowres
+
+================================================================================
+
+GENERATION ORDER:
+1. Generate all 33 frames in order
+2. Save each with filename matching the frame label (e.g., "Frame_01_START.png")
+3. Keep organized by beat for easier animation workflow
+4. Generate at 1024x720, upscale later if needed
+
+TOTAL: 33 KEYFRAMES
+Part 1: 24 frames
+Part 2: 9 frames
+
+NO MISTAKES, JUST HAPPY LITTLE KEYFRAMES! 🎨🏔️
+
+================================================================================

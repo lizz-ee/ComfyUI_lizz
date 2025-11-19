@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Export ComfyUI Workflow to API Format</title>
+</head>
+<body>
+    <h1>Export ComfyUI Workflow to API Format</h1>
+    <p><strong>Instructions:</strong></p>
+    <ol>
+        <li>Open ComfyUI at <a href="http://127.0.0.1:8188" target="_blank">http://127.0.0.1:8188</a></li>
+        <li>Load your workflow: <code>cliff_fall_ipadapter_multiseed.json</code></li>
+        <li>Open browser Developer Console (F12)</li>
+        <li>Paste this code and press Enter:</li>
+    </ol>
+
+    <textarea id="code" rows="20" cols="100" readonly>
+// Get the workflow in API format
+async function exportAPIFormat() {
+    const prompt = await app.graphToPrompt();
+    const json = JSON.stringify(prompt.workflow, null, 2);
+
+    // Create download link
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'cliff_fall_ipadapter_multiseed_API.json';
+    a.click();
+
+    console.log('API format workflow downloaded!');
+    console.log('Workflow:', prompt.workflow);
+}
+
+exportAPIFormat();
+    </textarea>
+
+    <br><br>
+    <button onclick="copyCode()">Copy Code to Clipboard</button>
+
+    <p><strong>After running:</strong> The file <code>cliff_fall_ipadapter_multiseed_API.json</code> will be downloaded to your Downloads folder. Move it to <code>D:\ComfyUI_lizz\workflows\</code></p>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById('code');
+            code.select();
+            document.execCommand('copy');
+            alert('Code copied to clipboard!');
+        }
+    </script>
+</body>
+</html>

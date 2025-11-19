@@ -1,0 +1,74 @@
+==============================================================================
+  COMFYUI MODELS MIGRATION TO D:\models
+==============================================================================
+
+STATUS: IN PROGRESS
+
+WHAT WAS DONE:
+--------------
+
+1. Created directory structure on D:\models with folders:
+   - checkpoints/
+   - vae/
+   - loras/
+   - diffusion_models/
+   - clip/
+   - unet/
+   - controlnet/
+   - embeddings/
+   - upscale_models/
+   - style_models/
+   - photomaker/
+   - vae_approx/
+   - clip_vision/
+
+2. Created extra_model_paths.yaml configuration file
+   - Location: C:\Users\User\Desktop\ComfyUI_lizz\extra_model_paths.yaml
+   - Set D:\models as the base_path
+   - Marked as is_default: true (for auto-download to this location)
+
+3. Currently copying 85GB of models from C: to D: drive
+   - Source: C:\Users\User\Desktop\ComfyUI_lizz\models\
+   - Destination: D:\models\
+
+HOW IT WORKS:
+-------------
+
+ComfyUI reads the extra_model_paths.yaml file on startup and automatically:
+- Scans D:\models\ for all model files
+- Uses D:\models\ as the default download location for new models
+- ComfyUI Manager will automatically download to D:\models\
+
+The "is_default: true" setting ensures that:
+- All new model downloads from ComfyUI Manager go to D:\models\
+- The folder appears first in the model selection dropdowns
+- It's used for all default file operations
+
+NEXT STEPS:
+-----------
+
+1. Wait for the copy operation to complete (85GB total)
+2. Restart ComfyUI to load the new configuration
+3. Verify models are detected from D:\models\
+4. Test loading a workflow to confirm everything works
+5. Once verified, delete C:\Users\User\Desktop\ComfyUI_lizz\models\ to free up C drive space
+
+IMPORTANT NOTES:
+----------------
+
+- DO NOT delete the C:\models\ folder until you verify D:\models\ works!
+- ComfyUI must be restarted for the new paths to take effect
+- All future ComfyUI Manager downloads will automatically go to D:\models\
+- The extra_model_paths.yaml file is checked into git for backup
+
+VIDEO GENERATION MODELS:
+------------------------
+
+Models ready for lizzchar video generation:
+- LTX Video: ltx-video-2b-v0.9.1.safetensors (5.4GB) - READY
+- Mochi-1: Downloading via ComfyUI Manager
+- Hunyuan Video: Downloading via ComfyUI Manager (text-to-video + image-to-video)
+
+All future video model downloads will go directly to D:\models\diffusion_models\
+
+==============================================================================

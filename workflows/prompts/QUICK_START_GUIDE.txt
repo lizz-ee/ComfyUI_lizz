@@ -1,0 +1,160 @@
+================================================================================
+CLIFF FALL - QUICK START GUIDE
+IP-Adapter Workflow for Scene Consistency
+================================================================================
+
+## STEP 1: GENERATE SCENE MASTERS (4 images)
+
+Open SCENE_MASTERS_prompts.txt and generate these background-only reference images:
+
+1. SCENE_MASTER_A - Cliff Edge Landscape
+   → Used for Beats 1-6 (Frames 01-13)
+
+2. SCENE_MASTER_B - Mid-Air Falling View
+   → Used for Beat 7 (Frames 14-18)
+
+3. SCENE_MASTER_C - Deep Atmosphere Sky
+   → Used for Beats 8-9 (Frames 19-24)
+
+4. SCENE_MASTER_D - Cliff Edge Return (Different Angle)
+   → Used for Beats 10-12 (Frames 25-33)
+
+IMPORTANT:
+- NO LoRA for Scene Masters (or very light, 0.3 max)
+- Generate 2-3 variations of each
+- Pick the BEST one to use as reference
+- Save as Scene_Master_A.png, Scene_Master_B.png, etc.
+
+================================================================================
+
+## STEP 2: SET UP IP-ADAPTER WORKFLOW IN COMFYUI
+
+Your workflow needs these nodes:
+
+1. UNETLoader (FLUX Dev FP8)
+2. LoraLoaderModelOnly (lizzchar_lora @ 0.85)
+3. DualCLIPLoader
+4. CLIPTextEncode (positive prompt)
+5. EmptySD3LatentImage (1024x720)
+6. **IPAdapter** node (NEW)
+   - Load Scene Master image here
+   - Weight: 0.4-0.5
+   - Model: IP-Adapter FLUX
+7. KSampler (20 steps, CFG 1.0, euler, simple)
+8. VAEDecode
+9. SaveImage
+
+The IP-Adapter node sits between the UNET/LoRA and the KSampler.
+
+================================================================================
+
+## STEP 3: GENERATE CHARACTER FRAMES (33 images)
+
+Open ALL_PROMPTS_cliff_fall.txt
+
+For each frame:
+1. Load the appropriate Scene Master into IP-Adapter:
+   - Frames 01-13 → Scene_Master_A
+   - Frames 14-18 → Scene_Master_B
+   - Frames 19-24 → Scene_Master_C
+   - Frames 25-33 → Scene_Master_D
+
+2. Copy the prompt from ALL_PROMPTS_cliff_fall.txt
+3. Paste into positive prompt node
+4. Generate
+5. Save with frame label (Frame_01_START.png, etc.)
+
+================================================================================
+
+## SCENE MASTER MAPPING (Quick Reference)
+
+Beat 1: Landscape Reveal → SCENE_MASTER_A
+Beat 2: Approach → SCENE_MASTER_A
+Beat 3: Face Contemplation → SCENE_MASTER_A
+Beat 4: The Test → SCENE_MASTER_A
+Beat 5: The Leap → SCENE_MASTER_A
+Beat 6: Wide Fall → SCENE_MASTER_A (transitioning to B)
+Beat 7: Silhouette → SCENE_MASTER_B
+Beat 8: Spinning → SCENE_MASTER_C
+Beat 9: Forever Fall → SCENE_MASTER_C
+Beat 10: Return → SCENE_MASTER_D
+Beat 11: Turn → SCENE_MASTER_D
+Beat 12: Walk Away → SCENE_MASTER_D
+
+================================================================================
+
+## IP-ADAPTER SETTINGS
+
+- **Weight**: 0.4-0.5
+  - Too low (< 0.3): Scene won't stay consistent
+  - Too high (> 0.6): Character may be constrained/distorted
+  - Sweet spot: 0.45
+
+- **Model**: Use IP-Adapter FLUX model
+  - Download from HuggingFace if you don't have it
+  - Place in ComfyUI/models/ipadapter/
+
+================================================================================
+
+## TROUBLESHOOTING
+
+**Problem**: Character is distorted or stuck in one pose
+**Solution**: Lower IP-Adapter weight to 0.35-0.4
+
+**Problem**: Scenery changes too much between frames
+**Solution**: Increase IP-Adapter weight to 0.5-0.55
+
+**Problem**: Background dominates, character details lost
+**Solution**:
+- Check LoRA is loaded at 0.85
+- Lower IP-Adapter to 0.4
+- Make character description more detailed in prompt
+
+**Problem**: Scene Master backgrounds don't match style
+**Solution**:
+- Regenerate Scene Masters
+- Make sure "Bob Ross painting style meets Arcane animation" is in prompt
+- Try adding light LoRA (0.3) for Scene Masters
+
+================================================================================
+
+## GENERATION ORDER
+
+RECOMMENDED:
+1. Generate all 4 Scene Masters first
+2. Pick best versions
+3. Generate all frames for Beat 1 (using Scene_Master_A)
+4. Generate all frames for Beat 2 (using Scene_Master_A)
+5. Continue through all beats sequentially
+
+ALTERNATIVE (Faster testing):
+1. Generate Scene_Master_A only
+2. Generate just Frames 01-06 to test consistency
+3. If good, generate remaining Scene Masters
+4. Complete all frames
+
+================================================================================
+
+## TOTAL GENERATION COUNT
+
+- Scene Masters: 4 images (+ 2-3 variations each = 8-12 total for picking)
+- Character Frames: 33 images
+- **TOTAL: ~41-45 images to generate**
+
+At ~30-60 seconds per image on RTX 3090:
+**Total generation time: ~20-45 minutes**
+
+================================================================================
+
+READY TO START?
+
+1. Open SCENE_MASTERS_prompts.txt
+2. Generate your 4 Scene Masters
+3. Pick the best of each
+4. Set up IP-Adapter in ComfyUI
+5. Open ALL_PROMPTS_cliff_fall.txt
+6. Start generating character frames!
+
+NO MISTAKES, JUST HAPPY LITTLE SCENE MASTERS! 🎨🏔️
+
+================================================================================

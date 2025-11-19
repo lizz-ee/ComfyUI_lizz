@@ -1,0 +1,47 @@
+LIZZCHAR VIDEO GENERATION GUIDE
+================================
+
+You now have 3 complete video generation pipelines!
+
+STEP 1: DOWNLOAD MODELS
+------------------------
+
+Option A: Use ComfyUI Manager
+1. Open http://127.0.0.1:8188
+2. Click Manager → Install Models
+3. Download:
+   - LTX Video: ltx-video-2b-v0.9.1.safetensors (~9GB)
+   - Mochi-1: mochi_preview_dit_fp8_e4m3fn.safetensors (~17GB)
+   - Hunyuan: hunyuan_video_720_cfgdistill_fp8_e4m3fn.safetensors (~30GB)
+
+Option B: Run download_video_models.bat
+
+STEP 2: CHOOSE WORKFLOW
+------------------------
+
+1. LTX VIDEO (FAST) - lizzchar_ltx_video.json
+   - Speed: 2-3 minutes
+   - Quality: Good
+   - VRAM: 12GB
+   - Best for: Quick testing
+
+2. MOCHI-1 (HIGH QUALITY) - lizzchar_mochi_video.json
+   - Speed: 5-7 minutes
+   - Quality: Very Good
+   - VRAM: 16GB
+   - Best for: Quality output
+
+3. HUNYUAN (MAX QUALITY) - lizzchar_hunyuan_video.json
+   - Speed: 10-15 minutes
+   - Quality: Excellent
+   - VRAM: 20GB
+   - Best for: Final professional results
+
+QUICK START
+-----------
+1. Download models
+2. Load lizzchar_ltx_video.json in ComfyUI
+3. Queue Prompt
+4. Check output/ folder for video
+
+All workflows include your lizzchar LoRA + Arcane style!

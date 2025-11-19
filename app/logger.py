@@ -32,7 +32,12 @@ class LogInterceptor(io.TextIOWrapper):
         super().write(data)
 
     def flush(self):
-        super().flush()
+        try:
+            super().flush()
+        except OSError:
+            # Windows-specific issue where buffer becomes invalid
+            # Safe to ignore - logger will continue working
+            pass
         for cb in self._flush_callbacks:
             cb(self._logs_since_flush)
             self._logs_since_flush = []

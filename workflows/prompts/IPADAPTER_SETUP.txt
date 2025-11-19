@@ -1,0 +1,166 @@
+================================================================================
+IP-ADAPTER WORKFLOW SETUP - SCENE CONSISTENCY
+================================================================================
+
+🎯 GOAL: Use your cleanplate to lock the scenery across all character shots
+📸 CLEANPLATE: The background image WITHOUT the character
+🔒 RESULT: Same cliff, same landscape, same lighting across all frames
+
+================================================================================
+STEP 1: SAVE YOUR CLEANPLATE
+================================================================================
+
+1. Save the cleanplate image you just created to:
+   D:\ComfyUI_lizz\input\cliff_cleanplate.png
+
+2. Make sure it's named exactly: cliff_cleanplate.png
+
+================================================================================
+STEP 2: LOAD THE IP-ADAPTER WORKFLOW
+================================================================================
+
+1. Open ComfyUI at http://localhost:8188
+
+2. Load the workflow:
+   cliff_fall_ipadapter_multiseed.json
+
+3. You'll see these key nodes:
+
+   🎨 Load Cleanplate (Node 20)
+   - This loads your background reference
+   - Should show: cliff_cleanplate.png
+
+   🔒 Apply Scene Lock (Node 22)
+   - IP-Adapter weight: 0.45
+   - This "locks" the scenery to match your cleanplate
+   - Higher = stronger scene match (0.3-0.6 range)
+
+================================================================================
+STEP 3: GENERATE WITH SCENE CONSISTENCY
+================================================================================
+
+For each of the 33 frames:
+
+1. Copy prompt from ALL_PROMPTS_cliff_fall.txt
+
+2. Paste into Node 4 (the big text box)
+
+3. Click "Queue Prompt"
+
+4. All 4 seeds generate at once, ALL using the same cliff background!
+
+5. Results:
+   - Same cliff edge
+   - Same mountains
+   - Same valley
+   - Same sunset
+   - But different character poses/actions
+
+================================================================================
+HOW IT WORKS
+================================================================================
+
+WITHOUT IP-Adapter:
+  Every generation = random new cliff/landscape
+  Inconsistent scenery between shots
+
+WITH IP-Adapter:
+  Every generation = uses YOUR specific cliff
+  Consistent scenery across all shots
+  Character changes, background stays locked
+
+================================================================================
+IP-ADAPTER WEIGHT GUIDE
+================================================================================
+
+0.30 - Light influence (scenery similar, more variation)
+0.45 - Balanced (RECOMMENDED - locks main elements, allows detail variation)
+0.60 - Strong influence (very tight scene lock)
+0.75+ - Too strong (may fight with character generation)
+
+Current setting: 0.45 (good balance)
+
+To adjust: Click on Node 22 "Apply Scene Lock" → change first number
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+✅ DO include character in prompts
+   - The IP-Adapter locks SCENERY, not character
+   - Your LoRA handles character consistency
+   - Prompt describes character pose/action
+
+✅ Cleanplate should NOT have character
+   - Pure background reference
+   - Cliff, mountains, sky, trees only
+
+✅ Keep resolution matching
+   - Cleanplate: 1024x720
+   - Generations: 1024x720
+   - Same as your proven images
+
+================================================================================
+EXAMPLE WORKFLOW
+================================================================================
+
+Frame 01_START prompt:
+"lizzchar woman with purple streaks in dark hair, standing at cliff edge,
+contemplative, Bob Ross painting style meets Arcane animation..."
+
+IP-Adapter sees cleanplate → locks the cliff/mountains/sky
+LoRA sees "lizzchar woman" → generates your character
+Prompt describes → her standing pose
+
+Result: Your character in YOUR specific cliff location! 🎯
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+❌ Character not showing up:
+   → Lower IP-Adapter weight (try 0.35)
+
+❌ Background too different from cleanplate:
+   → Raise IP-Adapter weight (try 0.55)
+
+❌ Images look flat/blurry:
+   → Weight too high, lower to 0.40-0.45
+
+❌ "Image not found" error:
+   → Check cleanplate is in D:\ComfyUI_lizz\input\
+   → Check filename is exactly: cliff_cleanplate.png
+
+================================================================================
+SEED STRATEGY WITH IP-ADAPTER
+================================================================================
+
+All 4 seeds (51, 42, 50, 43) will now use the SAME cliff background!
+
+The seeds will vary:
+- Character pose details
+- Lighting on character
+- Hair flow
+- Clothing folds
+- Minor atmospheric effects
+
+But keep consistent:
+- Cliff shape and position
+- Mountain layers
+- Valley depth
+- Overall color palette
+- Sunset position
+
+This gives you variety in character while maintaining scene continuity! 🎨
+
+================================================================================
+
+READY TO GENERATE!
+
+1. Save cleanplate as: D:\ComfyUI_lizz\input\cliff_cleanplate.png
+2. Load: cliff_fall_ipadapter_multiseed.json
+3. Start generating frames with scene lock! 🔒
+
+NO MISTAKES, JUST HAPPY LITTLE CONSISTENT CLIFFS!
+
+================================================================================

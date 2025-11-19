@@ -1,0 +1,172 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "HyVideoLoraSelect",
+      "pos": [50, 100],
+      "size": [315, 122],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {"name": "lora", "type": "HYVIDLORA", "links": [1], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "HyVideoLoraSelect"},
+      "widgets_values": ["lizzchar_hunyuan_200.safetensors", 0.85]
+    },
+    {
+      "id": 2,
+      "type": "HyVideoModelLoader",
+      "pos": [400, 100],
+      "size": [315, 242],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {"name": "lora", "type": "HYVIDLORA", "link": 1}
+      ],
+      "outputs": [
+        {"name": "model", "type": "HYVIDEOMODEL", "links": [2], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "HyVideoModelLoader"},
+      "widgets_values": ["hunyuan_video\\hunyuan_video_720_cfgdistill_bf16.safetensors", "bf16", "disabled", "main_device", "sdpa", false, true]
+    },
+    {
+      "id": 3,
+      "type": "DownloadAndLoadHyVideoTextEncoder",
+      "pos": [50, 260],
+      "size": [315, 202],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {"name": "hyvid_text_encoder", "type": "HYVIDTEXTENCODER", "links": [3], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "DownloadAndLoadHyVideoTextEncoder"},
+      "widgets_values": ["Kijai/llava-llama-3-8b-text-encoder-tokenizer", "disabled", "bf16", false, 2, "fp8_e4m3fn", "offload_device"]
+    },
+    {
+      "id": 4,
+      "type": "HyVideoCFG",
+      "pos": [400, 380],
+      "size": [315, 182],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {"name": "hyvid_cfg", "type": "HYVID_CFG", "links": [4], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "HyVideoCFG"},
+      "widgets_values": ["blurry, low quality, distorted face, static, no motion, jittery, watermark", 6.0, 0.0, 1.0, true, true]
+    },
+    {
+      "id": 5,
+      "type": "HyVideoTextEncode",
+      "pos": [750, 100],
+      "size": [400, 236],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {"name": "text_encoders", "type": "HYVIDTEXTENCODER", "link": 3},
+        {"name": "hyvid_cfg", "type": "HYVID_CFG", "link": 4}
+      ],
+      "outputs": [
+        {"name": "hyvid_embeds", "type": "HYVIDEMBEDS", "links": [5], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "HyVideoTextEncode"},
+      "widgets_values": ["lizzchar woman with purple streaks in dark hair, turning head from left side profile to looking directly at camera, smooth cinematic head rotation, Arcane animation style, dramatic rim lighting, detailed facial features, high quality", true, "video"]
+    },
+    {
+      "id": 6,
+      "type": "HyVideoSampler",
+      "pos": [1200, 100],
+      "size": [315, 626],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "HYVIDEOMODEL", "link": 2},
+        {"name": "hyvid_embeds", "type": "HYVIDEMBEDS", "link": 5}
+      ],
+      "outputs": [
+        {"name": "samples", "type": "LATENT", "links": [7], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "HyVideoSampler"},
+      "widgets_values": [544, 960, 49, 30, 6.0, 9.0, 42, true]
+    },
+    {
+      "id": 7,
+      "type": "HyVideoVAELoader",
+      "pos": [750, 380],
+      "size": [315, 82],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {"name": "vae", "type": "VAE", "links": [8], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "HyVideoVAELoader"},
+      "widgets_values": ["hunyuan_video_vae_bf16.safetensors", "bf16"]
+    },
+    {
+      "id": 8,
+      "type": "HyVideoDecode",
+      "pos": [1200, 760],
+      "size": [260, 198],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {"name": "vae", "type": "VAE", "link": 8},
+        {"name": "samples", "type": "LATENT", "link": 7}
+      ],
+      "outputs": [
+        {"name": "images", "type": "IMAGE", "links": [9], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "HyVideoDecode"},
+      "widgets_values": [true, 64, 256, true, 0, false]
+    },
+    {
+      "id": 9,
+      "type": "VHS_VideoCombine",
+      "pos": [1550, 100],
+      "size": [320, 334],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 9}
+      ],
+      "properties": {"Node name for S&R": "VHS_VideoCombine"},
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "lizzchar_hunyuan_imax",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true
+      }
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "HYVIDLORA"],
+    [2, 2, 0, 6, 0, "HYVIDEOMODEL"],
+    [3, 3, 0, 5, 0, "HYVIDTEXTENCODER"],
+    [4, 4, 0, 5, 1, "HYVID_CFG"],
+    [5, 5, 0, 6, 1, "HYVIDEMBEDS"],
+    [7, 6, 0, 8, 1, "LATENT"],
+    [8, 7, 0, 8, 0, "VAE"],
+    [9, 8, 0, 9, 0, "IMAGE"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

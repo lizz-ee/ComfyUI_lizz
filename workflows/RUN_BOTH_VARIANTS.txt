@@ -1,0 +1,199 @@
+================================================================================
+HOW TO RUN BOTH VARIANTS (ORIGINAL + ENHANCED)
+================================================================================
+
+The script now automatically organizes outputs by variant!
+
+NEW FOLDER STRUCTURE:
+D:\ComfyUI_lizz\output\fall\
+├── original\
+│   ├── Seed_51\
+│   │   ├── v001\
+│   │   │   ├── cliff_51_Frame_01_START_v001.png
+│   │   │   └── ... (all 33 frames)
+│   │   └── v002\
+│   ├── Seed_42\
+│   └── ...
+└── enhanced\
+    ├── Seed_51\
+    │   ├── v001\
+    │   │   ├── cliff_51_Frame_01_START_v001.png
+    │   │   └── ... (all 33 frames)
+    │   └── v002\
+    └── ...
+
+================================================================================
+STEP 1: RUN ORIGINAL VARIANT
+================================================================================
+
+1. Open: D:\ComfyUI_lizz\workflows\generate_cliff_fall.py
+
+2. Check line 28 says:
+   ACTIVE_VARIANT = 'original'
+
+3. Run the script:
+   cd D:\ComfyUI_lizz\workflows
+   python generate_cliff_fall.py --single
+
+4. Output goes to:
+   D:\ComfyUI_lizz\output\fall\original\Seed_XX\v001\
+
+5. You'll see in the header:
+   ╔════════════════════════════════════════════════════════════════════════╗
+   ║         CLIFF FALL SEQUENCE - AUTOMATED BATCH GENERATOR               ║
+   ║         📦 VARIANT: ORIGINAL                                           ║
+   ╚════════════════════════════════════════════════════════════════════════╝
+
+ESTIMATED TIME: ~45-60 minutes for all 132 images
+
+================================================================================
+STEP 2: RUN ENHANCED VARIANT (PURPLE RIM)
+================================================================================
+
+1. Open: D:\ComfyUI_lizz\workflows\generate_cliff_fall.py
+
+2. CHANGE line 28 to:
+   ACTIVE_VARIANT = 'enhanced'
+
+3. Save the file
+
+4. Run the script again:
+   python generate_cliff_fall.py --single
+
+5. Output goes to:
+   D:\ComfyUI_lizz\output\fall\enhanced\Seed_XX\v001\
+
+6. You'll see in the header:
+   ╔════════════════════════════════════════════════════════════════════════╗
+   ║         CLIFF FALL SEQUENCE - AUTOMATED BATCH GENERATOR               ║
+   ║         📦 VARIANT: ENHANCED                                           ║
+   ╚════════════════════════════════════════════════════════════════════════╝
+
+ESTIMATED TIME: ~45-60 minutes for all 132 images
+
+================================================================================
+COMPARING THE TWO VARIANTS
+================================================================================
+
+After both runs complete, compare side-by-side:
+
+ORIGINAL Frame_03_START:
+  fall\original\Seed_51\v001\cliff_51_Frame_03_START_v001.png
+
+ENHANCED Frame_03_START:
+  fall\enhanced\Seed_51\v001\cliff_51_Frame_03_START_v001.png
+
+Open both in image viewer and compare:
+- Purple rim lighting strength
+- Arcane glow effect
+- Overall aesthetic
+- Which works better with Bob Ross background
+
+================================================================================
+RUNNING BOTH AUTOMATICALLY
+================================================================================
+
+Want to run both variants back-to-back without manual editing?
+
+Option 1: Run twice manually (recommended for first time)
+  - Run original → verify it works → then run enhanced
+
+Option 2: Create a batch script:
+
+Create file: run_both_variants.bat
+
+@echo off
+echo Running ORIGINAL variant...
+python -c "exec(open('generate_cliff_fall.py').read().replace(\"ACTIVE_VARIANT = 'original'\", \"ACTIVE_VARIANT = 'original'\"))"
+
+echo.
+echo Waiting 10 seconds before running enhanced...
+timeout /t 10
+
+echo Running ENHANCED variant...
+python -c "exec(open('generate_cliff_fall.py').read().replace(\"ACTIVE_VARIANT = 'original'\", \"ACTIVE_VARIANT = 'enhanced'\"))"
+
+echo.
+echo Both variants complete!
+pause
+
+(Note: This is advanced - easier to just run twice manually)
+
+================================================================================
+WHICH VARIANT TO USE?
+================================================================================
+
+ORIGINAL - Use if:
+  ✓ You want subtle, natural lighting
+  ✓ Bob Ross painterly aesthetic is priority
+  ✓ Purple in hair but not necessarily glowing edges
+  ✓ More realistic/grounded look
+
+ENHANCED - Use if:
+  ✓ You want strong Arcane-style neon glow
+  ✓ Purple-blue rim lighting on edges is important
+  ✓ More stylized, dramatic lighting
+  ✓ Signature "Arcane" aesthetic
+
+MIX AND MATCH:
+  After seeing both, you can also:
+  - Use ORIGINAL for wide landscape shots
+  - Use ENHANCED for character close-ups
+  - Pick best frames from each variant
+
+================================================================================
+VERSIONING WITHIN VARIANTS
+================================================================================
+
+Each variant tracks versions independently:
+
+ORIGINAL:
+  - First run: v001
+  - Second run: v002
+  - Third run: v003
+
+ENHANCED:
+  - First run: v001
+  - Second run: v002
+  - Third run: v003
+
+So you can:
+1. Run original → fall\original\Seed_51\v001\
+2. Run enhanced → fall\enhanced\Seed_51\v001\
+3. Tweak prompts, run original again → fall\original\Seed_51\v002\
+4. Tweak prompts, run enhanced again → fall\enhanced\Seed_51\v002\
+
+Nothing ever gets overwritten! 🎨
+
+================================================================================
+QUICK REFERENCE
+================================================================================
+
+TO SWITCH VARIANTS:
+  Edit line 28 in generate_cliff_fall.py:
+  ACTIVE_VARIANT = 'original'  # or 'enhanced'
+
+OUTPUT PATHS:
+  Original:  D:\ComfyUI_lizz\output\fall\original\
+  Enhanced:  D:\ComfyUI_lizz\output\fall\enhanced\
+
+PROMPTS USED:
+  Original:  prompts/ALL_PROMPTS_cliff_fall.txt
+  Enhanced:  prompts/ALL_PROMPTS_cliff_fall_PURPLE_RIM.txt
+
+TIME PER VARIANT:
+  ~45-60 minutes for 132 images (33 frames × 4 seeds)
+
+================================================================================
+
+READY TO GENERATE BOTH VARIANTS! 🚀
+
+1. Run with ACTIVE_VARIANT = 'original'
+2. Wait ~45-60 minutes
+3. Change to ACTIVE_VARIANT = 'enhanced'
+4. Run again, wait ~45-60 minutes
+5. Compare results and pick your favorite! 🎨
+
+NO MISTAKES, JUST HAPPY LITTLE PURPLE RIMS!
+
+================================================================================

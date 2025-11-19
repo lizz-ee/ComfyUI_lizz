@@ -1,0 +1,75 @@
+================================================================================
+SCENE MASTER REFERENCES - GENERATE THESE FIRST
+Bob Ross Meets Arcane | 1024x720
+================================================================================
+
+These are BACKGROUND-ONLY reference images. Generate these first, pick the best
+of each, then use with IP-Adapter for character frames.
+
+NO CHARACTER in these frames - pure scenery only!
+
+SETTINGS:
+- Resolution: 1024x720
+- Model: FLUX Dev FP8
+- Steps: 20
+- CFG: 1.0
+- Sampler: euler
+- Scheduler: simple
+- NO LoRA for scene masters (or very light, 0.3 max)
+
+================================================================================
+
+SCENE_MASTER_A - Cliff Edge Landscape
+(Use for Frames 01-06: Opening through The Leap)
+
+vast Bob Ross landscape view from cliff edge perspective, massive cliff edge prominent on right side of frame, happy little trees covering valleys far below, misty mountain layers in distance, dramatic sunset clouds with warm oranges and cool purples, vertigo-inducing height, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm golden hour glow, rich oil paint texture, epic scale vista showing extreme cliff height, cinematic composition, vibrant color palette with warm oranges and cool blues, masterful blending, high quality, serene nature, no people, empty cliff edge, 1024x720
+
+================================================================================
+
+SCENE_MASTER_B - Mid-Air Falling View
+(Use for Frames 07-09: Wide fall through Silhouette)
+
+vast Bob Ross landscape seen from high altitude aerial perspective, happy little trees and valleys spread below getting smaller, massive cliff face visible in distance to the side, dramatic sunset sky with warm oranges and purples, layers of atmosphere, clouds at middle altitude, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm golden atmospheric glow, rich oil paint texture, epic scale aerial view, falling perspective, cinematic composition, vibrant color palette with sunset colors, masterful blending, high quality, no people, empty sky view, 1024x720
+
+================================================================================
+
+SCENE_MASTER_C - Deep Atmosphere Sky
+(Use for Frames 10-12: Spinning through Forever fall)
+
+endless atmospheric sky view, layers upon layers of clouds and atmosphere, compressed perspective showing depth, dramatic sky with warm glow transitioning to cool depth, happy little clouds at various altitudes, infinite space feeling, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, atmospheric layers, rich oil paint texture, dreamy endless sky, cinematic composition, vibrant color palette with oranges fading to blues, masterful blending, high quality, no people, pure atmosphere, 1024x720
+
+================================================================================
+
+SCENE_MASTER_D - Cliff Edge Return (Different Angle)
+(Use for Frames 13-16: Walk away sequence, Part 2)
+
+Bob Ross landscape with cliff edge from different three-quarter angle, same location as Master A but viewed from behind and to the side, cliff edge on left side of frame this time, happy little trees in valleys below, misty mountains, dramatic sky with sunset fading to dusk, wind moving grasses at cliff edge, Bob Ross painting style meets Arcane animation, soft painterly brushstrokes, warm atmospheric glow fading, rich oil paint texture, peaceful overlook, different perspective, cinematic composition, vibrant color palette, masterful blending, high quality, no people, empty peaceful cliff, 1024x720
+
+================================================================================
+
+GENERATION WORKFLOW:
+
+STEP 1: Generate Scene Masters
+1. Generate each Scene Master (A, B, C, D)
+2. Generate 2-3 variations of each
+3. Pick the BEST one of each to use as reference
+4. Save as: "Scene_Master_A.png", "Scene_Master_B.png", etc.
+
+STEP 2: Note which frames use which master
+- Frames 01-06 → Scene_Master_A
+- Frames 07-09 → Scene_Master_B
+- Frames 10-12 → Scene_Master_C
+- Frames 13-16 → Scene_Master_D
+
+STEP 3: Generate character frames (see main prompts file)
+Load the appropriate Scene Master into IP-Adapter for each frame batch
+
+================================================================================
+
+IP-ADAPTER SETTINGS RECOMMENDATION:
+
+- Weight: 0.4-0.5 (strong enough for scene lock, not so strong it fights character)
+- Model: IP-Adapter FLUX model
+- Apply to: Image generation before character injection
+
+================================================================================

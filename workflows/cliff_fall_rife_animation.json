@@ -1,0 +1,46 @@
+{
+  "1": {
+    "inputs": {
+      "directory": "D:\\ComfyUI_lizz\\output\\fall\\cleanplate_01\\original\\Seed_51\\v001",
+      "image_load_cap": 0,
+      "skip_first_images": 0,
+      "select_every_nth": 1
+    },
+    "class_type": "VHS_LoadImagesPath",
+    "_meta": {
+      "title": "Load Image Sequence"
+    }
+  },
+  "2": {
+    "inputs": {
+      "ckpt_name": "rife47.pth",
+      "frames": ["1", 0],
+      "clear_cache_after_n_frames": 10,
+      "multiplier": 4,
+      "fast_mode": true,
+      "ensemble": true,
+      "scale_factor": 1.0
+    },
+    "class_type": "RIFE VFI",
+    "_meta": {
+      "title": "RIFE Frame Interpolation"
+    }
+  },
+  "3": {
+    "inputs": {
+      "images": ["2", 0],
+      "frame_rate": 30,
+      "loop_count": 0,
+      "filename_prefix": "cliff_fall_rife",
+      "format": "video/h264-mp4",
+      "crf": 20,
+      "save_metadata": true,
+      "pingpong": false,
+      "save_output": true
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine"
+    }
+  }
+}
