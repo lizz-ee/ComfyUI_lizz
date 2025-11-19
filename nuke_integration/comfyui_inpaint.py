@@ -151,8 +151,20 @@ class ComfyUIInpaintNode:
 
         seed_knob = nuke.Int_Knob('seed', 'Seed')
         seed_knob.setValue(0)
-        seed_knob.setTooltip('0 = random seed')
+        seed_knob.setTooltip('Base seed value (behavior depends on Seed Mode)')
         node.addKnob(seed_knob)
+
+        seed_mode_knob = nuke.Enumeration_Knob('seed_mode', 'Seed Mode', [
+            'fixed', 'random', 'per_frame', 'base_plus_frame'
+        ])
+        seed_mode_knob.setValue('fixed')
+        seed_mode_knob.setTooltip(
+            'fixed: Use seed value as-is\n'
+            'random: Generate random seed each execution\n'
+            'per_frame: Use current frame number as seed\n'
+            'base_plus_frame: Seed + frame number (for animatable variations)'
+        )
+        node.addKnob(seed_mode_knob)
 
         sampler_knob = nuke.Enumeration_Knob('sampler', 'Sampler', [
             'euler', 'euler_ancestral', 'heun', 'dpm_2', 'dpm_2_ancestral',
@@ -507,6 +519,23 @@ def execute_inpaint(node):
     node['status'].setValue('Processing...')
 
     try:
+        # Calculate seed based on seed mode
+        import random
+        base_seed = int(node['seed'].value())
+        seed_mode = node['seed_mode'].value()
+        current_frame = nuke.frame()
+
+        if seed_mode == 'fixed':
+            final_seed = base_seed
+        elif seed_mode == 'random':
+            final_seed = random.randint(0, 2**32 - 1)
+        elif seed_mode == 'per_frame':
+            final_seed = current_frame
+        elif seed_mode == 'base_plus_frame':
+            final_seed = base_seed + current_frame
+        else:
+            final_seed = base_seed
+
         # Get parameters from knobs
         params = {
             'checkpoint': node['checkpoint'].value(),
@@ -515,7 +544,7 @@ def execute_inpaint(node):
             'steps': int(node['steps'].value()),
             'cfg': float(node['cfg'].value()),
             'denoise': float(node['denoise'].value()),
-            'seed': int(node['seed'].value()),
+            'seed': final_seed,
             'sampler': node['sampler'].value(),
             'scheduler': node['scheduler'].value(),
             'grow_mask': int(node['grow_mask'].value())
@@ -599,7 +628,7 @@ def execute_inpaint(node):
             result_node['reload'].execute()
         node.end()
 
-        node['status'].setValue(f'Complete! Result: {result_path}')
+        node['status'].setValue(f'Complete! Seed: {final_seed}')
 
         # Trigger viewer update
         nuke.updateUI()
